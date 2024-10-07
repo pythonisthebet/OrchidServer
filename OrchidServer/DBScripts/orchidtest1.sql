@@ -23,29 +23,7 @@ IsPremium bit Not Null Default 0,
 IsAdmin bit Not Null Default 0
 
 )
-
-Create Table Ch_List
-
-(
-
-ChId int Primary Key,
-
-UserId int Foreign Key References AppUsers(Id),
-
-Main_Class int Foreign Key References Class(Id),
-
-Race int Foreign Key References Race(Id),
-
-Subclass int Foreign Key References Race(Id),
-
-Level_Value int not null Default 1,
-
-IsMultiClass bit Not Null Default 0,
-
-imgID int
-
-)
-
+/* creating components for cheracter first to avoid error */
 Create Table Races
 
 (
@@ -76,7 +54,7 @@ Create Table Sub_Classes
 
 Id int Primary Key Identity,
 
-Class_Id int Foreign Key References Class(Id),
+Class_Id int Foreign Key References Classes(Id),
 
 Sub_C_Name nvarchar(50) Unique Not Null,
 
@@ -164,6 +142,29 @@ E_Description nvarchar(2000) Not Null,
 
 IsOfficial bit Not Null Default 0
 )
+
+Create Table Ch_List
+
+(
+
+Id int Primary Key,
+
+UserId int Foreign Key References AppUsers(Id),
+
+Main_Class int Foreign Key References Classes(Id),
+
+Race int Foreign Key References Races(Id),
+
+Subclass int Foreign Key References Races(Id),
+
+Level_Value int not null Default 1,
+
+IsMultiClass bit Not Null Default 0,
+
+imgID int
+
+)
+
 
 Create Table Parties
 (
