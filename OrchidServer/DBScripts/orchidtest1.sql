@@ -1,4 +1,8 @@
-﻿Create Database OrchidDB
+﻿Drop Database OrchidDB
+
+Go
+
+Create Database OrchidDB
 
 Go
 
@@ -242,3 +246,17 @@ Reason nvarchar(100) Not Null,
 Explanation nvarchar(100) Not Null,
 
 )
+
+-- Create a login for the admin user
+CREATE LOGIN [OrchidAdminLogin] WITH PASSWORD = 'theOrchid';
+Go
+
+-- Create a user in the YourProjectNameDB database for the login
+CREATE USER [OrchidAdminUser] FOR LOGIN [OrchidAdminLogin];
+Go
+
+-- Add the user to the db_owner role to grant admin privileges
+ALTER ROLE db_owner ADD MEMBER [OrchidAdminUser];
+Go
+
+-- scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=OrchidDB;User ID=OrchidAdminLogin;Password=theOrchid;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context OrchidDbContext -DataAnnotations –force
