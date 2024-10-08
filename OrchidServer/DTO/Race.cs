@@ -8,25 +8,33 @@ using OrchidServer.Models;
 
 namespace OrchidServer.DTO;
 
-[Index("RName", Name = "UQ__Races__89ED98905C1D8BF9", IsUnique = true)]
-public partial class Race
+public class Race
 {
-    [Key]
     public int Id { get; set; }
 
-    [Column("R_Name")]
-    [StringLength(50)]
     public string RName { get; set; } = null!;
 
-    [Column("R_Description")]
-    [StringLength(4000)]
     public string RDescription { get; set; } = null!;
 
     public bool IsOfficial { get; set; }
 
-    [InverseProperty("RaceNavigation")]
-    public virtual ICollection<ChList> ChListRaceNavigations { get; set; } = new List<ChList>();
+    public Race() { }
 
-    [InverseProperty("SubclassNavigation")]
-    public virtual ICollection<ChList> ChListSubclassNavigations { get; set; } = new List<ChList>();
+    public Race(Models.Race model)
+    {
+        this.Id = model.Id;
+        this.RName = model.RName;
+        this.RDescription = model.RDescription;
+        this.IsOfficial = model.IsOfficial;
+    }
+
+    public Models.Race GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    {
+        Models.Race newModel = new Models.Race();
+        newModel.Id = this.Id;
+        newModel.RName = this.RName;
+        newModel.RDescription = this.RDescription;
+        newModel.IsOfficial = this.IsOfficial;
+        return newModel;
+    }
 }

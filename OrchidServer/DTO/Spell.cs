@@ -8,22 +8,37 @@ using OrchidServer.Models;
 
 namespace OrchidServer.DTO;
 
-[Index("SName", Name = "UQ__Spells__A21ED07D6A7B1038", IsUnique = true)]
-public partial class Spell
+public class Spell
 {
-    [Key]
     public int Id { get; set; }
 
-    [Column("S_Name")]
-    [StringLength(50)]
     public string SName { get; set; } = null!;
 
-    [Column("S_Level")]
     public int SLevel { get; set; }
 
-    [Column("S_Description")]
-    [StringLength(4000)]
     public string SDescription { get; set; } = null!;
 
     public bool IsOfficial { get; set; }
+
+    public Spell() { }
+
+    public Spell(Models.Spell model)
+    {
+        this.Id = model.Id;
+        this.SName = model.SName;
+        this.SLevel = model.SLevel;
+        this.SDescription = model.SDescription;
+        this.IsOfficial = model.IsOfficial;
+    }
+
+    public Models.Spell GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    {
+        Models.Spell newModel = new Models.Spell();
+        newModel.Id = this.Id;
+        newModel.SName = this.SName;
+        newModel.SLevel = this.SLevel;
+        newModel.SDescription = this.SDescription;
+        newModel.IsOfficial = this.IsOfficial;
+        return newModel;
+    }
 }
