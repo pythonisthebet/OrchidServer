@@ -165,8 +165,6 @@ Level_Value int not null Default 1,
 
 IsMultiClass bit Not Null Default 0,
 
-imgID int
-
 )
 
 

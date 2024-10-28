@@ -23,8 +23,7 @@ public class ChList
     public int LevelValue { get; set; }
 
     public bool IsMultiClass { get; set; }
-
-    public int? ImgId { get; set; }
+    public string ChImagePath { get; set; } = "";
 
     /////////////////////////////////////////////add jason integration for the missing data
 
@@ -37,7 +36,6 @@ public class ChList
         this.Race = model.Race;
         this.Subclass = model.Subclass;
         this.LevelValue = model.LevelValue;
-        this.ImgId = model.ImgId;
     }
 
     public Models.ChList GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
@@ -49,7 +47,6 @@ public class ChList
         newModel.Race = this.Race;
         newModel.Subclass = this.Subclass;
         newModel.LevelValue = this.LevelValue;
-        newModel.ImgId = this.ImgId;
         return newModel;
     }
 }
