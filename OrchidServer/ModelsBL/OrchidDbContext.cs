@@ -9,7 +9,6 @@ public partial class OrchidDbContext : DbContext
     public AppUser? GetUser(string email)
     {
         return this.AppUsers.Where(u => u.UserEmail == email)
-                            .Include(u => u.ChLists)
                             .FirstOrDefault();
     }
 }
