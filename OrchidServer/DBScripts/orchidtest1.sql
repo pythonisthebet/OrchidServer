@@ -257,6 +257,9 @@ Go
 ALTER ROLE db_owner ADD MEMBER [OrchidAdminUser];
 Go
 
+Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1, 1)
+Go
+
 SELECT * FROM AppUsers;
 GO
 
