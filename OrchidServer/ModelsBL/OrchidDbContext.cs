@@ -11,5 +11,16 @@ public partial class OrchidDbContext : DbContext
         return this.AppUsers.Where(u => u.UserEmail == email)
                             .FirstOrDefault();
     }
+
+    public AppUser? GetUserById(int id)
+    {
+        return this.AppUsers.Where(u => u.Id == id)
+                            .FirstOrDefault();
+    }
+
+    public List<AppUser>? GetAllUsersC()
+    {
+        return this.AppUsers.ToList();
+    }
 }
 

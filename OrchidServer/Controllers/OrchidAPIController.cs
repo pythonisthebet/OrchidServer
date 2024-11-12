@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Http;
 using OrchidServer.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
-
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace OrchidServer.Controllers
 {
@@ -82,6 +82,29 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        [HttpPost("updateUser")]
+        public IActionResult UpdateUser([FromBody] OrchidServer.DTO.AppUser userDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.AppUser modelsUser = userDto.GetModel();
+
+                context.AppUsers.Update(modelsUser);
+                context.SaveChanges();
+
+                //User was added!
+                return Ok(modelsUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
         //this function check which profile image exist and return the virtual path of it.
         //if it does not exist it returns the default profile image virtual path
         private string GetProfileImageVirtualPath(int userId)
@@ -107,6 +130,33 @@ namespace OrchidServer.Controllers
 
             return virtualPath;
         }
+
+        [HttpPost("getAllUsers")]
+        public IActionResult GetAllUsers()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+
+                List<Models.AppUser>? Modelusers = context.GetAllUsersC();
+                List<DTO.AppUser> Dtousers = new List<DTO.AppUser>();
+
+
+                foreach (Models.AppUser user in Modelusers)
+                {
+                    DTO.AppUser placeholderuser = new(user);
+                    Dtousers.Add(placeholderuser);
+                }
+                return Ok(Dtousers);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }
 
