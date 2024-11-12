@@ -131,7 +131,7 @@ namespace OrchidServer.Controllers
             return virtualPath;
         }
 
-        [HttpPost("getAllUsers")]
+        [HttpGet("getAllUsers")]
         public IActionResult GetAllUsers()
         {
             try
