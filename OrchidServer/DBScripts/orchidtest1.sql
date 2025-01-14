@@ -125,6 +125,29 @@ Level_taken int not null Default 1,
 )
 
 -- Table
+-- Every proficiency a character has in a saving throw
+
+Create Table Proficiencies_saves
+
+(
+
+Id int Primary Key Foreign Key References Cheracters(Id),
+
+Strength bit not null Default 0,
+
+Dexterity bit not null Default 0,
+
+Constitution bit not null Default 0,
+
+Intelligence bit not null Default 0,
+
+Wisdom bit not null Default 0,
+
+Charisma bit not null Default 0,
+
+)
+
+-- Table
 -- Every proficiency a character has in a skill
 
 Create Table Proficiencies_skills
