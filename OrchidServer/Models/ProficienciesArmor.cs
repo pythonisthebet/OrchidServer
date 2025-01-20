@@ -6,8 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-[Table("Proficiencies_Armours")]
-public partial class ProficienciesArmour
+[Table("Proficiencies_Armors")]
+public partial class ProficienciesArmor
 {
     [Key]
     public int Id { get; set; }
@@ -24,7 +24,9 @@ public partial class ProficienciesArmour
     [Column("Light_Armor")]
     public bool LightArmor { get; set; }
 
+    public bool Shield { get; set; }
+
     [ForeignKey("Id")]
-    [InverseProperty("ProficienciesArmour")]
+    [InverseProperty("ProficienciesArmor")]
     public virtual Character IdNavigation { get; set; } = null!;
 }

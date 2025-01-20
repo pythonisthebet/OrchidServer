@@ -3,15 +3,15 @@ using System.ComponentModel.DataAnnotations;
 
 namespace OrchidServer.DTO
 {
-    public class Cheracter
+    public class Character
     {
         public int Id { get; set; }
         public int? UserId { get; set; }
         public int LevelValue { get; set; }
         public string? ImgId { get; set; }
 
-        public Cheracter() { }
-        public Cheracter(Models.Cheracter model)
+        public Character() { }
+        public Character(Models.Character model)
         {
             this.Id = model.Id;
             this.UserId = model.UserId;
@@ -20,9 +20,9 @@ namespace OrchidServer.DTO
 
         }
 
-        public Models.Cheracter GetModel()
+        public Models.Character GetModel()
         {
-            Models.Cheracter newModel = new Models.Cheracter();
+            Models.Character newModel = new Models.Character();
             newModel.Id = this.Id;
             newModel.UserId = this.UserId;
             newModel.LevelValue = this.LevelValue;

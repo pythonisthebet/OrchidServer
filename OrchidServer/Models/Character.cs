@@ -33,7 +33,7 @@ public partial class Character
     public virtual Feat? Feat { get; set; }
 
     [InverseProperty("IdNavigation")]
-    public virtual ProficienciesArmour? ProficienciesArmour { get; set; }
+    public virtual ProficienciesArmor? ProficienciesArmor { get; set; }
 
     [InverseProperty("IdNavigation")]
     public virtual ProficienciesLanguage? ProficienciesLanguage { get; set; }

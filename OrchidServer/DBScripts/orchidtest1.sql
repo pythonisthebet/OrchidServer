@@ -357,7 +357,10 @@ Heavy_Armor bit Not Null Default 0,
 
 Medium_Armor bit Not Null Default 0,
 
-Light_Armor bit Not Null Default 0, 
+Light_Armor bit Not Null Default 0,
+
+Shield bit Not Null Default 0,
+
 )
 
 -- Table
