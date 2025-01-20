@@ -6,6 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+
+
+
+
+
+
+
+
+
+//outdated
+
+
+
+
+
+
+
+
+
+
 [Table("Ch_List")]
 public partial class ChList
 {

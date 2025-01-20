@@ -6,24 +6,25 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-public partial class Equipment
+[Table("Proficiencies_saves")]
+public partial class ProficienciesSafe
 {
     [Key]
     public int Id { get; set; }
 
-    [Column("Is_Weapon")]
-    public bool IsWeapon { get; set; }
+    public bool Strength { get; set; }
 
-    [Column("Is_Armor")]
-    public bool IsArmor { get; set; }
+    public bool Dexterity { get; set; }
 
-    [Column("Is_Shield")]
-    public bool IsShield { get; set; }
+    public bool Constitution { get; set; }
 
-    [Column("Is_Attunment")]
-    public bool IsAttunment { get; set; }
+    public bool Intelligence { get; set; }
+
+    public bool Wisdom { get; set; }
+
+    public bool Charisma { get; set; }
 
     [ForeignKey("Id")]
-    [InverseProperty("Equipment")]
+    [InverseProperty("ProficienciesSafe")]
     public virtual Cheracter IdNavigation { get; set; } = null!;
 }

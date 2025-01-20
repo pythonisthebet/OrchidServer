@@ -6,6 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+
+
+
+
+
+
+
+
+
+//outdated
+
+
+
+
+
+
+
+
+
+
 [Table("Equip_Type")]
 [Index("Tname", Name = "UQ__Equip_Ty__8E5169F5BF5FC627", IsUnique = true)]
 public partial class EquipType

@@ -6,6 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+
+
+
+
+
+
+
+
+
+//outdated
+
+
+
+
+
+
+
+
+
+
 [Table("Sub_Classes")]
 [Index("SubCName", Name = "UQ__Sub_Clas__1989AE56E9FBD543", IsUnique = true)]
 public partial class SubClass

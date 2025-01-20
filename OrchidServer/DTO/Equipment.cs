@@ -11,23 +11,19 @@ namespace OrchidServer.DTO;
 public class Equipment
 {
     public int Id { get; set; }
-
-    public int? TypeId { get; set; }
-
-    public int? RarityId { get; set; }
-
-    public string EDescription { get; set; } = null!;
-
-    public bool IsOfficial { get; set; }
+    public bool IsWeapon { get; set; }
+    public bool IsArmor { get; set; }
+    public bool IsShield { get; set; }
+    public bool IsAttunment { get; set; }
 
     public Equipment() { }
     public Equipment(Models.Equipment model)
     {
         this.Id = model.Id;
-        this.TypeId = model.TypeId;
-        this.RarityId = model.RarityId;
-        this.EDescription = model.EDescription;
-        this.IsOfficial = model.IsOfficial;
+        this.IsWeapon = model.IsWeapon;
+        this.IsArmor = model.IsArmor;
+        this.IsShield = model.IsShield;
+        this.IsAttunment = model.IsAttunment;
     }
 
     public Models.Equipment GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!

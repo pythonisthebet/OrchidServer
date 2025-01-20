@@ -6,6 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+
+
+
+
+
+
+
+
+
+//outdated
+
+
+
+
+
+
+
+
+
+
 [Table("Equip_Rarity")]
 [Index("Rname", Name = "UQ__Equip_Ra__754413986A58A93B", IsUnique = true)]
 public partial class EquipRarity

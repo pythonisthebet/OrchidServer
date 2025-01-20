@@ -6,6 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+
+
+
+
+
+
+
+
+
+//outdated
+
+
+
+
+
+
+
+
+
+
 [Table("Skill_Stats")]
 [Index("Sname", Name = "UQ__Skill_St__457BC2DAD74FDE66", IsUnique = true)]
 public partial class SkillStat

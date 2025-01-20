@@ -61,6 +61,7 @@ img_id nvarchar(100)
 
 Create Table Character_Stats
 (
+Id int Primary Key Foreign Key References Cheracters(Id) ,
 
 Strength int not null,
 

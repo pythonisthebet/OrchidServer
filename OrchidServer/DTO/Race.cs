@@ -11,30 +11,24 @@ namespace OrchidServer.DTO;
 public class Race
 {
     public int Id { get; set; }
-
-    public string RName { get; set; } = null!;
-
-    public string RDescription { get; set; } = null!;
-
-    public bool IsOfficial { get; set; }
+    public string RaceName { get; set; } = null!;
+    public string SubraceName { get; set; } = null!;
 
     public Race() { }
 
     public Race(Models.Race model)
     {
         this.Id = model.Id;
-        this.RName = model.RName;
-        this.RDescription = model.RDescription;
-        this.IsOfficial = model.IsOfficial;
+        this.RaceName = model.RaceName;
+        this.SubraceName = model.SubraceName;
     }
 
     public Models.Race GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
     {
         Models.Race newModel = new Models.Race();
         newModel.Id = this.Id;
-        newModel.RName = this.RName;
-        newModel.RDescription = this.RDescription;
-        newModel.IsOfficial = this.IsOfficial;
+        newModel.RaceName = this.RaceName;
+        newModel.SubraceName = this.SubraceName;
         return newModel;
     }
 }

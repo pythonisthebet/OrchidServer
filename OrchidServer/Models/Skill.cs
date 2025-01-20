@@ -6,6 +6,26 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+
+
+
+
+
+
+
+
+
+//outdated
+
+
+
+
+
+
+
+
+
+
 [Index("Sname", Name = "UQ__Skills__457BC2DADF8C118D", IsUnique = true)]
 public partial class Skill
 {
