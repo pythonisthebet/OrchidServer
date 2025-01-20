@@ -41,7 +41,7 @@ IsAdmin bit Not Null Default 0
 -- Table
 -- Every character a player created
 
-Create Table Cheracters
+Create Table Characters
 
 (
 
@@ -61,7 +61,7 @@ img_id nvarchar(100)
 
 Create Table Character_Stats
 (
-Id int Primary Key Foreign Key References Cheracters(Id) ,
+Id int Primary Key Foreign Key References Characters(Id) ,
 
 Strength int not null,
 
@@ -85,7 +85,7 @@ Create Table Race
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id) ,
+Id int Primary Key Foreign Key References Characters(Id) ,
 
 Race_Name nvarchar(50) Not Null,
 
@@ -99,7 +99,7 @@ Create Table Class
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Class_Name nvarchar(50) Not Null,
 
@@ -117,7 +117,7 @@ Create Table Feats
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Feat_Name nvarchar(50) Not Null,
 
@@ -132,7 +132,7 @@ Create Table Proficiencies_saves
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Strength bit not null Default 0,
 
@@ -155,7 +155,7 @@ Create Table Proficiencies_skills
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Acrobatics bit Not Null Default 0,
 
@@ -202,7 +202,7 @@ Create Table Proficiencies_languages
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Common bit Not Null Default 0,
 
@@ -250,7 +250,7 @@ Create Table Proficiencies_Tools
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Alchemists_supplies bit Not Null Default 0,
 Brewers_supplies bit Not Null Default 0,
@@ -296,7 +296,7 @@ Create Table Proficiencies_Weapons
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Simple_Weapons bit Not Null Default 0,
 
@@ -349,7 +349,7 @@ Create Table Proficiencies_Armours
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 All_Armor bit Not Null Default 0,
 
@@ -361,13 +361,13 @@ Light_Armor bit Not Null Default 0,
 )
 
 -- Table
--- Every spell a cheracter has learned
+-- Every spell a Character has learned
 
 
 Create Table Spells
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Spell_Name nvarchar(50) Not Null,
 
@@ -377,14 +377,14 @@ Spell_Level int not null Default 0,
 
 
 -- Table
--- Every equipment a cheracter has
+-- Every equipment a Character has
 
 
 Create Table Equipments
 
 (
 
-Id int Primary Key Foreign Key References Cheracters(Id),
+Id int Primary Key Foreign Key References Characters(Id),
 
 Is_Weapon bit Not Null Default 0, 
 
