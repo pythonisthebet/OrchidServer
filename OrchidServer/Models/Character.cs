@@ -6,20 +6,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-public partial class Cheracter
+public partial class Character
 {
-    
-
-
-
-    /// <summary>
-    /// outdated
-    /// </summary>
-
-
-
-
-
     [Key]
     public int Id { get; set; }
 
@@ -31,6 +19,9 @@ public partial class Cheracter
     [Column("img_id")]
     [StringLength(100)]
     public string? ImgId { get; set; }
+
+    [InverseProperty("IdNavigation")]
+    public virtual CharacterStat? CharacterStat { get; set; }
 
     [InverseProperty("IdNavigation")]
     public virtual Class? Class { get; set; }
@@ -66,6 +57,6 @@ public partial class Cheracter
     public virtual Spell? Spell { get; set; }
 
     [ForeignKey("UserId")]
-    [InverseProperty("Cheracters")]
+    [InverseProperty("Characters")]
     public virtual AppUser? User { get; set; }
 }

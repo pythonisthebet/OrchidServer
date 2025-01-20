@@ -26,5 +26,5 @@ public partial class ProficienciesSafe
 
     [ForeignKey("Id")]
     [InverseProperty("ProficienciesSafe")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }

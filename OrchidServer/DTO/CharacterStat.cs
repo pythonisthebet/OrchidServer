@@ -2,27 +2,46 @@
 {
     public class CharacterStat
     {
-        //public int Id { get; set; }
+        public int Id { get; set; }
 
-        //public string CName { get; set; } = null!;
+        public int Strength { get; set; }
 
-        //public string CDescription { get; set; } = null!;
+        public int Dexterity { get; set; }
 
-        //public Class() { }
-        //public Class(Models.Class model)
-        //{
-        //    this.Id = model.Id;
-        //    this.CName = model.CName;
-        //    this.CDescription = model.CDescription;
-        //}
+        public int Constitution { get; set; }
 
-        //public Models.Class GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
-        //{
-        //    Models.Class newModel = new Models.Class();
-        //    newModel.Id = this.Id;
-        //    newModel.CName = this.CName;
-        //    newModel.CDescription = this.CDescription;
-        //    return newModel;
-        //}
+        public int Intelligence { get; set; }
+
+        public int Wisdom { get; set; }
+
+        public int Charisma { get; set; }
+
+        public CharacterStat() { }
+
+        public CharacterStat(Models.CharacterStat model)
+        {
+            this.Id = model.Id;
+            this.Strength = model.Strength;
+            this.Dexterity = model.Dexterity;
+            this.Constitution = model.Constitution;
+            this.Intelligence = model.Intelligence;
+            this.Wisdom = model.Wisdom;
+            this.Charisma = model.Charisma;
+
+
+        }
+
+        public Models.CharacterStat GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+        {
+            Models.CharacterStat newModel = new Models.CharacterStat();
+            newModel.Id = this.Id;
+            newModel.Strength = this.Strength;
+            newModel.Dexterity = this.Dexterity;
+            newModel.Constitution = this.Constitution;
+            newModel.Intelligence = this.Intelligence;
+            newModel.Wisdom = this.Wisdom;
+            newModel.Charisma = this.Charisma;
+            return newModel;
+        }
     }
 }

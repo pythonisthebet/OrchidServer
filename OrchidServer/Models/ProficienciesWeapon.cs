@@ -99,5 +99,5 @@ public partial class ProficienciesWeapon
 
     [ForeignKey("Id")]
     [InverseProperty("ProficienciesWeapon")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }

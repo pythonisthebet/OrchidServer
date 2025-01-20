@@ -20,5 +20,5 @@ public partial class Spell
 
     [ForeignKey("Id")]
     [InverseProperty("Spell")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }

@@ -53,5 +53,5 @@ public partial class ProficienciesLanguage
 
     [ForeignKey("Id")]
     [InverseProperty("ProficienciesLanguage")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }

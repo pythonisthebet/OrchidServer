@@ -22,5 +22,5 @@ public partial class Race
 
     [ForeignKey("Id")]
     [InverseProperty("Race")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }

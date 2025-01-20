@@ -345,7 +345,7 @@ Net bit Not Null Default 0,
 -- Every proficiency a character has in a armor
 
 
-Create Table Proficiencies_Armours
+Create Table Proficiencies_Armors
 
 (
 

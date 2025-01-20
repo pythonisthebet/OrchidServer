@@ -6,10 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-[Keyless]
 [Table("Character_Stats")]
 public partial class CharacterStat
 {
+    [Key]
+    public int Id { get; set; }
+
     public int Strength { get; set; }
 
     public int Dexterity { get; set; }
@@ -21,4 +23,8 @@ public partial class CharacterStat
     public int Wisdom { get; set; }
 
     public int Charisma { get; set; }
+
+    [ForeignKey("Id")]
+    [InverseProperty("CharacterStat")]
+    public virtual Character IdNavigation { get; set; } = null!;
 }

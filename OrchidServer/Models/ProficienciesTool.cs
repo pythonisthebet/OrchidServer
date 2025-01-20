@@ -104,5 +104,5 @@ public partial class ProficienciesTool
 
     [ForeignKey("Id")]
     [InverseProperty("ProficienciesTool")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }

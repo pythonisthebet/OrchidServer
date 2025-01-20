@@ -20,5 +20,5 @@ public partial class Feat
 
     [ForeignKey("Id")]
     [InverseProperty("Feat")]
-    public virtual Cheracter IdNavigation { get; set; } = null!;
+    public virtual Character IdNavigation { get; set; } = null!;
 }
