@@ -30,10 +30,10 @@ public class Equipment
     {
         Models.Equipment newModel = new Models.Equipment();
         newModel.Id = this.Id;
-        newModel.TypeId = this.TypeId;
-        newModel.RarityId = this.RarityId;
-        newModel.EDescription = this.EDescription;
-        newModel.IsOfficial = this.IsOfficial;
+        newModel.IsWeapon = this.IsWeapon;
+        newModel.IsArmor = this.IsArmor;
+        newModel.IsShield = this.IsShield;
+        newModel.IsAttunment = this.IsAttunment;
         return newModel;
     }
 }
