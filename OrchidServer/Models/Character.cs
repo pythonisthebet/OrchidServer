@@ -13,6 +13,10 @@ public partial class Character
 
     public int? UserId { get; set; }
 
+    [Column("Character_Name")]
+    [StringLength(50)]
+    public string CharacterName { get; set; } = null!;
+
     [Column("Level_Value")]
     public int LevelValue { get; set; }
 

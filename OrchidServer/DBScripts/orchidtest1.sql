@@ -49,6 +49,8 @@ Id int Primary Key,
 
 UserId int Foreign Key References AppUsers(Id),
 
+Character_Name nvarchar(50) Not Null,
+
 Level_Value int not null Default 1,
 
 img_id nvarchar(100)
