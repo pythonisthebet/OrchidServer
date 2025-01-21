@@ -157,6 +157,32 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpGet("getAllcharacters")]
+        public IActionResult GetAllCharacters([FromBody] OrchidServer.DTO.AppUser userDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+                Models.AppUser appUser = userDto.GetModel();
+                List<Models.Character>? ModelCharacters = context.GetAllCharacters(appUser);
+                List<DTO.Character> DtoCharacters = new List<DTO.Character>();
+
+
+                foreach (Models.Character character in ModelCharacters)
+                {
+                    DTO.Character placeholderuser = new(character);
+                    DtoCharacters.Add(placeholderuser);
+                }
+                return Ok(DtoCharacters);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }
 

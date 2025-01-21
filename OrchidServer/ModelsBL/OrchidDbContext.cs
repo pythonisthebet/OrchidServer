@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using OrchidServer.DTO;
 
 namespace OrchidServer.Models;
 
@@ -21,6 +22,11 @@ public partial class OrchidDbContext : DbContext
     public List<AppUser>? GetAllUsersC()
     {
         return this.AppUsers.ToList();
+    }
+
+    public List<Character>? GetAllCharacters(AppUser user)
+    {
+        return this.Characters.Where(u => u.User == user).ToList();
     }
 }
 
