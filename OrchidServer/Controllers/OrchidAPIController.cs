@@ -183,6 +183,30 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("createCharacter")]
+        public IActionResult CreateCharacter([FromBody] OrchidServer.DTO.Character character)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.Character modelsCharacter = character.GetModel();
+
+                context.Characters.Add(modelsCharacter);
+                context.SaveChanges();
+
+                //User was added!
+                DTO.Character dtoCharacter = new DTO.Character(modelsCharacter);
+                return Ok(dtoCharacter);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+        
     }
 }
 
