@@ -207,7 +207,7 @@ namespace OrchidServer.Controllers
 
         }
 
-        [HttpGet("getAllClasses")]
+        [HttpPost("getAllClasses")]
         public IActionResult GetAllClasses([FromBody] OrchidServer.DTO.Character character)
         {
             try
