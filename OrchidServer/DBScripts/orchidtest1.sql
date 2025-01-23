@@ -45,7 +45,7 @@ Create Table Characters
 
 (
 
-Id int Primary Key,
+Id int Primary Key Identity,
 
 UserId int Foreign Key References AppUsers(Id),
 
