@@ -206,7 +206,80 @@ namespace OrchidServer.Controllers
             }
 
         }
-        
+
+        [HttpGet("getAllClasses")]
+        public IActionResult GetAllClasses([FromBody] OrchidServer.DTO.Character character)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+                Models.Character modelCharacter = character.GetModel();
+                List<Models.Class>? ModelClasses = context.GetAllClasses(modelCharacter);
+                List<DTO.Class> DtoClasses = new List<DTO.Class>();
+
+
+                foreach (Models.Class item in ModelClasses)
+                {
+                    DTO.Class placeholderClass = new(item);
+                    DtoClasses.Add(placeholderClass);
+                }
+                return Ok(DtoClasses);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+
+        [HttpPost("addClass")]
+        public IActionResult AddClass([FromBody] OrchidServer.DTO.Class item)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.Class modelsClass = item.GetModel();
+
+                context.Classes.Add(modelsClass);
+                context.SaveChanges();
+
+                //User was added!
+                DTO.Class dtoClass = new DTO.Class(modelsClass);
+                return Ok(dtoClass);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("removeClasses")]
+        public IActionResult RemoveClasses([FromBody] int id)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+
+                context.RemoveAllClasses(id);
+
+                //context.SaveChanges(); //is redundent 
+
+                //User was added!
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }
 
