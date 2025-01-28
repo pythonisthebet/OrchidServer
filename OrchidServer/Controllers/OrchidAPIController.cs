@@ -157,7 +157,7 @@ namespace OrchidServer.Controllers
 
         }
 
-        [HttpGet("getAllcharacters")]
+        [HttpPost("getAllCharacters")]
         public IActionResult GetAllCharacters([FromBody] OrchidServer.DTO.AppUser userDto)
         {
             try
