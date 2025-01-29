@@ -233,6 +233,28 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("getRace")]
+        public IActionResult GetRace([FromBody] OrchidServer.DTO.Character character)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+                Models.Character modelCharacter = character.GetModel();
+                Models.Race? ModelRace = context.GetRace(modelCharacter);
+                DTO.Race DtoRace = new DTO.Race();
+
+                DTO.Race race = new(ModelRace);
+
+                return Ok(race);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
 
         [HttpPost("addClass")]
         public IActionResult AddClass([FromBody] OrchidServer.DTO.Class item)
