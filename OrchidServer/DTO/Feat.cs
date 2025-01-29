@@ -11,6 +11,7 @@ namespace OrchidServer.DTO;
 public class Feat
 {
     public int Id { get; set; }
+    public int? Character_id { get; set; }
     public string FeatName { get; set; } = null!;
     public int LevelTaken { get; set; }
 
@@ -19,6 +20,7 @@ public class Feat
     public Feat(Models.Feat model)
     {
         this.Id = model.Id;
+        this.Character_id = model.CharacterId;
         this.FeatName = model.FeatName;
         this.LevelTaken = model.LevelTaken;
     }
@@ -27,6 +29,7 @@ public class Feat
     {
         Models.Feat newModel = new Models.Feat();
         newModel.Id = this.Id;
+        newModel.CharacterId = this.Character_id;
         newModel.FeatName = this.FeatName;
         newModel.LevelTaken = this.LevelTaken;
         return newModel;

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-[Index("UserEmail", Name = "UQ__AppUsers__08638DF84536CE36", IsUnique = true)]
+[Index("UserEmail", Name = "UQ__AppUsers__08638DF860CF06EC", IsUnique = true)]
 public partial class AppUser
 {
     [Key]

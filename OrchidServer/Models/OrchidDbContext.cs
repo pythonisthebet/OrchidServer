@@ -63,19 +63,19 @@ public partial class OrchidDbContext : DbContext
     {
         modelBuilder.Entity<AppUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AppUsers__3214EC074AF1AB91");
+            entity.HasKey(e => e.Id).HasName("PK__AppUsers__3214EC077BCC5DDF");
         });
 
         modelBuilder.Entity<Appeal>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Appeals__3214EC07544C8180");
+            entity.HasKey(e => e.Id).HasName("PK__Appeals__3214EC07E72F949B");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Appeals).HasConstraintName("FK__Appeals__UserId__56E8E7AB");
+            entity.HasOne(d => d.User).WithMany(p => p.Appeals).HasConstraintName("FK__Appeals__UserId__59C55456");
         });
 
         modelBuilder.Entity<Character>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Characte__3214EC077D73F3B8");
+            entity.HasKey(e => e.Id).HasName("PK__Characte__3214EC0786D5FFE4");
 
             entity.Property(e => e.LevelValue).HasDefaultValue(1);
 
@@ -84,7 +84,7 @@ public partial class OrchidDbContext : DbContext
 
         modelBuilder.Entity<CharacterStat>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Characte__3214EC079BCDAFE9");
+            entity.HasKey(e => e.Id).HasName("PK__Characte__3214EC07A8FBA575");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -95,140 +95,144 @@ public partial class OrchidDbContext : DbContext
 
         modelBuilder.Entity<Class>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__Class__3214EC070C08C1A0");
+
             entity.Property(e => e.LevelValue).HasDefaultValue(1);
 
-            entity.HasOne(d => d.IdNavigation).WithMany().HasConstraintName("FK__Class__Id__31EC6D26");
+            entity.HasOne(d => d.Character).WithMany(p => p.Classes).HasConstraintName("FK__Class__Character__32E0915F");
         });
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC07DA2803F4");
+            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC07B748A38E");
 
             entity.Property(e => e.Likes).HasDefaultValue(0);
 
-            entity.HasOne(d => d.Post).WithMany(p => p.Comments).HasConstraintName("FK__Comments__PostId__531856C7");
+            entity.HasOne(d => d.Post).WithMany(p => p.Comments).HasConstraintName("FK__Comments__PostId__55F4C372");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Comments).HasConstraintName("FK__Comments__UserId__5224328E");
+            entity.HasOne(d => d.User).WithMany(p => p.Comments).HasConstraintName("FK__Comments__UserId__55009F39");
         });
 
         modelBuilder.Entity<Equipment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Equipmen__3214EC07ECE32B3E");
+            entity.HasKey(e => e.Id).HasName("PK__Equipmen__3214EC0779A421F3");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.Equipment)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Equipments__Id__3E1D39E1");
+                .HasConstraintName("FK__Equipments__Id__40F9A68C");
         });
 
         modelBuilder.Entity<Feat>(entity =>
         {
+            entity.HasKey(e => e.Id).HasName("PK__Feats__3214EC07E936BF10");
+
             entity.Property(e => e.LevelTaken).HasDefaultValue(1);
 
-            entity.HasOne(d => d.IdNavigation).WithMany().HasConstraintName("FK__Feats__Id__34C8D9D1");
+            entity.HasOne(d => d.Character).WithMany(p => p.Feats).HasConstraintName("FK__Feats__Character__36B12243");
         });
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC071E0D5785");
+            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC074AED4BEF");
         });
 
         modelBuilder.Entity<PartieUser>(entity =>
         {
-            entity.HasOne(d => d.Party).WithMany().HasConstraintName("FK__Partie_Us__Party__47A6A41B");
+            entity.HasOne(d => d.Party).WithMany().HasConstraintName("FK__Partie_Us__Party__4A8310C6");
 
-            entity.HasOne(d => d.User).WithMany().HasConstraintName("FK__Partie_Us__UserI__46B27FE2");
+            entity.HasOne(d => d.User).WithMany().HasConstraintName("FK__Partie_Us__UserI__498EEC8D");
         });
 
         modelBuilder.Entity<Party>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Parties__3214EC075E89ADF2");
+            entity.HasKey(e => e.Id).HasName("PK__Parties__3214EC07529CB1D1");
 
-            entity.HasOne(d => d.Dm).WithMany(p => p.Parties).HasConstraintName("FK__Parties__DmId__44CA3770");
+            entity.HasOne(d => d.Dm).WithMany(p => p.Parties).HasConstraintName("FK__Parties__DmId__47A6A41B");
         });
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC07AA4CF634");
+            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC0727B10179");
 
             entity.Property(e => e.Likes).HasDefaultValue(0);
             entity.Property(e => e.Pviews).HasDefaultValue(0);
 
-            entity.HasOne(d => d.ForumNavigation).WithMany(p => p.Posts).HasConstraintName("FK__Posts__Forum__4D5F7D71");
+            entity.HasOne(d => d.ForumNavigation).WithMany(p => p.Posts).HasConstraintName("FK__Posts__Forum__503BEA1C");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Posts).HasConstraintName("FK__Posts__UserId__4C6B5938");
+            entity.HasOne(d => d.User).WithMany(p => p.Posts).HasConstraintName("FK__Posts__UserId__4F47C5E3");
         });
 
         modelBuilder.Entity<ProficienciesArmor>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC0727764021");
+            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC07728C48BD");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ProficienciesArmor)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Proficiencie__Id__339FAB6E");
+                .HasConstraintName("FK__Proficiencie__Id__3587F3E0");
         });
 
         modelBuilder.Entity<ProficienciesLanguage>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC07342187A5");
+            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC07A3813848");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ProficienciesLanguage)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Proficiencie__Id__5535A963");
+                .HasConstraintName("FK__Proficiencie__Id__571DF1D5");
         });
 
         modelBuilder.Entity<ProficienciesSafe>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC07FBD94519");
+            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC073619D8D6");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ProficienciesSafe)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Proficiencie__Id__38996AB5");
+                .HasConstraintName("FK__Proficiencie__Id__3A81B327");
         });
 
         modelBuilder.Entity<ProficienciesSkill>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC075CE21480");
+            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC074E8D07A0");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ProficienciesSkill)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Proficiencie__Id__412EB0B6");
+                .HasConstraintName("FK__Proficiencie__Id__4316F928");
         });
 
         modelBuilder.Entity<ProficienciesTool>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC077898B054");
+            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC070D0C142F");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ProficienciesTool)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Proficiencie__Id__693CA210");
+                .HasConstraintName("FK__Proficiencie__Id__6B24EA82");
         });
 
         modelBuilder.Entity<ProficienciesWeapon>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC0787D292E1");
+            entity.HasKey(e => e.Id).HasName("PK__Proficie__3214EC0706EFE1D0");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
             entity.HasOne(d => d.IdNavigation).WithOne(p => p.ProficienciesWeapon)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Proficiencie__Id__0B91BA14");
+                .HasConstraintName("FK__Proficiencie__Id__0D7A0286");
         });
 
         modelBuilder.Entity<Race>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Race__3214EC0730B47B8E");
+            entity.HasKey(e => e.Id).HasName("PK__Race__3214EC07FC249830");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
 
@@ -239,7 +243,9 @@ public partial class OrchidDbContext : DbContext
 
         modelBuilder.Entity<Spell>(entity =>
         {
-            entity.HasOne(d => d.IdNavigation).WithMany().HasConstraintName("FK__Spells__Id__3A4CA8FD");
+            entity.HasKey(e => e.Id).HasName("PK__Spells__3214EC0758237832");
+
+            entity.HasOne(d => d.Character).WithMany(p => p.Spells).HasConstraintName("FK__Spells__Characte__3D2915A8");
         });
 
         OnModelCreatingPartial(modelBuilder);

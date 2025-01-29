@@ -27,8 +27,14 @@ public partial class Character
     [InverseProperty("IdNavigation")]
     public virtual CharacterStat? CharacterStat { get; set; }
 
+    [InverseProperty("Character")]
+    public virtual ICollection<Class> Classes { get; set; } = new List<Class>();
+
     [InverseProperty("IdNavigation")]
     public virtual Equipment? Equipment { get; set; }
+
+    [InverseProperty("Character")]
+    public virtual ICollection<Feat> Feats { get; set; } = new List<Feat>();
 
     [InverseProperty("IdNavigation")]
     public virtual ProficienciesArmor? ProficienciesArmor { get; set; }
@@ -50,6 +56,9 @@ public partial class Character
 
     [InverseProperty("IdNavigation")]
     public virtual Race? Race { get; set; }
+
+    [InverseProperty("Character")]
+    public virtual ICollection<Spell> Spells { get; set; } = new List<Spell>();
 
     [ForeignKey("UserId")]
     [InverseProperty("Characters")]
