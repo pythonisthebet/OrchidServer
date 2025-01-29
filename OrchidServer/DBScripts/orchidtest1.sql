@@ -101,7 +101,7 @@ Create Table Class
 
 (
 
-Id int Primary Key Foreign Key References Characters(Id),
+Id int Foreign Key References Characters(Id), /*not Primary Key*/
 
 Class_Name nvarchar(50) Not Null,
 
@@ -119,7 +119,7 @@ Create Table Feats
 
 (
 
-Id int Primary Key Foreign Key References Characters(Id),
+Id int Foreign Key References Characters(Id), /* Primary Key */
 
 Feat_Name nvarchar(50) Not Null,
 
@@ -372,7 +372,7 @@ Shield bit Not Null Default 0,
 Create Table Spells
 (
 
-Id int Primary Key Foreign Key References Characters(Id),
+Id int Foreign Key References Characters(Id), /* Primary Key*/
 
 Spell_Name nvarchar(50) Not Null,
 

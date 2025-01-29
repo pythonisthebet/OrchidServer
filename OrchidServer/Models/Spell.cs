@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+[Keyless]
 public partial class Spell
 {
-    [Key]
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     [Column("Spell_Name")]
     [StringLength(50)]
@@ -19,6 +19,5 @@ public partial class Spell
     public int SpellLevel { get; set; }
 
     [ForeignKey("Id")]
-    [InverseProperty("Spell")]
-    public virtual Character IdNavigation { get; set; } = null!;
+    public virtual Character? IdNavigation { get; set; }
 }

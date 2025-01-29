@@ -6,10 +6,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
+[Keyless]
 public partial class Feat
 {
-    [Key]
-    public int Id { get; set; }
+    public int? Id { get; set; }
 
     [Column("Feat_Name")]
     [StringLength(50)]
@@ -19,6 +19,5 @@ public partial class Feat
     public int LevelTaken { get; set; }
 
     [ForeignKey("Id")]
-    [InverseProperty("Feat")]
-    public virtual Character IdNavigation { get; set; } = null!;
+    public virtual Character? IdNavigation { get; set; }
 }

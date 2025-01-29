@@ -10,7 +10,7 @@ namespace OrchidServer.DTO;
 
 public class Class
 {
-    public int Id { get; set; }
+    public int? Id { get; set; }
     public string ClassName { get; set; } = null!;
     public string SubclassName { get; set; } = null!;
     public int LevelValue { get; set; }
