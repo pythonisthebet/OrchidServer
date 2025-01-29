@@ -31,12 +31,12 @@ public partial class OrchidDbContext : DbContext
 
     public List<Class>? GetAllClasses(Character character)
     {
-        return this.Classes.Where(u => u.Id == character.Id).ToList();
+        return this.Classes.Where(u => u.CharacterId == character.Id).ToList();
     }
 
-    public void RemoveAllClasses(int id)
+    public void RemoveAllClasses(Character character)
     {
-        this.Classes.Where(u => u.Id == id).ExecuteDelete();
+        this.Classes.Where(u => u.CharacterId == character.Id).ExecuteDelete();
     }
 }
 
