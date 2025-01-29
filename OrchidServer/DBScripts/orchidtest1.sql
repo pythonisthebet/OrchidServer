@@ -527,6 +527,9 @@ GO
 SELECT * FROM Characters;
 GO
 
+SELECT * FROM Race;
+GO
+
 SELECT * FROM Class;
 GO
 

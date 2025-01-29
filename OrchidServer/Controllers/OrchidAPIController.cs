@@ -255,6 +255,7 @@ namespace OrchidServer.Controllers
 
         }
 
+        #region Add
 
         [HttpPost("addClass")]
         public IActionResult AddClass([FromBody] OrchidServer.DTO.Class item)
@@ -280,6 +281,34 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("addRace")]
+        public IActionResult AddRace([FromBody] OrchidServer.DTO.Race item)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user Race
+                Models.Race modelsRace = item.GetModel();
+
+                context.Races.Add(modelsRace);
+                context.SaveChanges();
+
+                //User was added!
+                DTO.Race dtoRace = new DTO.Race(modelsRace);
+                return Ok(dtoRace);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        #endregion
+
+        #region delete
+
         [HttpPost("removeClasses")]
         public IActionResult RemoveClasses([FromBody] OrchidServer.DTO.Character character)
         {
@@ -301,6 +330,30 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        [HttpPost("removeRace")]
+        public IActionResult RemoveRace([FromBody] OrchidServer.DTO.Character character)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                Models.Character modelsCharacter = character.GetModel();
+                context.RemoveRace(modelsCharacter);
+
+                //context.SaveChanges(); //is redundent with delete it does that anyway
+
+                //User was added!
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        #endregion
 
     }
 }

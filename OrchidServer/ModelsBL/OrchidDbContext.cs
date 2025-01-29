@@ -43,5 +43,10 @@ public partial class OrchidDbContext : DbContext
     {
         this.Classes.Where(u => u.CharacterId == character.Id).ExecuteDelete();
     }
+
+    public void RemoveRace(Character character)
+    {
+        this.Races.Where(u => u.Id == character.Id).ExecuteDelete();
+    }
 }
 
