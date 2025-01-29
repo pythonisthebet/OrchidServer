@@ -259,16 +259,16 @@ namespace OrchidServer.Controllers
         }
 
         [HttpPost("removeClasses")]
-        public IActionResult RemoveClasses([FromBody] int id)
+        public IActionResult RemoveClasses([FromBody] OrchidServer.DTO.Character character)
         {
             try
             {
                 HttpContext.Session.Clear(); //Logout any previous login attempt
 
+                Models.Character modelsCharacter = character.GetModel();
+                context.RemoveAllClasses(modelsCharacter);
 
-                context.RemoveAllClasses(id);
-
-                //context.SaveChanges(); //is redundent 
+                //context.SaveChanges(); //is redundent with delete it does that anyway
 
                 //User was added!
                 return Ok();
