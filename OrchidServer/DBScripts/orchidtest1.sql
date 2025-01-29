@@ -524,6 +524,9 @@ Go
 SELECT * FROM AppUsers;
 GO
 
+SELECT * FROM Characters;
+GO
+
 SELECT * FROM Class;
 GO
 
