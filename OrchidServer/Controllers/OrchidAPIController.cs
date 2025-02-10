@@ -259,7 +259,6 @@ namespace OrchidServer.Controllers
 
         }
 
-        #region Add
 
         [HttpPost("addClass")]
         public IActionResult AddClass([FromBody] OrchidServer.DTO.Class item)
@@ -309,9 +308,29 @@ namespace OrchidServer.Controllers
 
         }
 
-        #endregion
+        [HttpPost("addSkills")]
+        public IActionResult AddSkills([FromBody] (DTO.Character character, string skill) tuple)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
 
-        #region delete
+                //Create model user class
+                Models.Character modelsCharacter = tuple.character.GetModel();
+                string skill = tuple.skill;
+                modelsCharacter.ProficienciesSkill[skill] = true;
+
+                context.Characters.Update(modelsCharacter);
+                context.SaveChanges();
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
 
         [HttpPost("removeClasses")]
         public IActionResult RemoveClasses([FromBody] OrchidServer.DTO.Character character)
@@ -356,8 +375,6 @@ namespace OrchidServer.Controllers
             }
 
         }
-
-        #endregion
 
     }
 }
