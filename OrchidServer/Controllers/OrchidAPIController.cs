@@ -238,14 +238,18 @@ namespace OrchidServer.Controllers
         {
             try
             {
+                
                 HttpContext.Session.Clear();
 
                 Models.Character modelCharacter = character.GetModel();
                 Models.Race? ModelRace = context.GetRace(modelCharacter);
-                DTO.Race DtoRace = new DTO.Race();
+                DTO.Race race = new();
+                if (ModelRace != null)
+                {
+                    DTO.Race DtoRace = new DTO.Race();
 
-                DTO.Race race = new(ModelRace);
-
+                    race = new(ModelRace);
+                }
                 return Ok(race);
             }
             catch (Exception ex)
