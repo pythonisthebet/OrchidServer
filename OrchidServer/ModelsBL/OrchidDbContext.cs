@@ -39,6 +39,11 @@ public partial class OrchidDbContext : DbContext
         return this.Races.Where(u => u.Id == character.Id).FirstOrDefault();
     }
 
+    public ProficienciesSkill? GetSkills(Character character)
+    {
+        return this.ProficienciesSkills.Where(u => u.Id == character.Id).FirstOrDefault();
+    }
+
     public void RemoveAllClasses(Character character)
     {
         this.Classes.Where(u => u.CharacterId == character.Id).ExecuteDelete();
@@ -47,6 +52,11 @@ public partial class OrchidDbContext : DbContext
     public void RemoveRace(Character character)
     {
         this.Races.Where(u => u.Id == character.Id).ExecuteDelete();
+    }
+
+    public void RemoveSkills(Character character)
+    {
+        this.ProficienciesSkills.Where(u => u.Id == character.Id).ExecuteDelete();
     }
 }
 

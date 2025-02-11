@@ -5,6 +5,7 @@ using OrchidServer.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Reflection;
 
 namespace OrchidServer.Controllers
 {
@@ -233,6 +234,46 @@ namespace OrchidServer.Controllers
 
         }
 
+
+        [HttpPost("getSkills")]
+        public IActionResult GetSkills([FromBody] OrchidServer.DTO.Character character)
+        {
+            try
+            {
+
+                HttpContext.Session.Clear();
+
+                Models.Character modelCharacter = character.GetModel();
+                Models.ProficienciesSkill? ModelSkills = context.GetSkills(modelCharacter);
+                DTO.ProficienciesSkill skills = new();
+                List<string> listskills = new();    
+                if (ModelSkills != null)
+                {
+                    DTO.ProficienciesSkill DtoSkills = new DTO.ProficienciesSkill();
+
+                    skills = new(ModelSkills);
+                }
+
+                foreach (PropertyInfo propertyInfo in skills.GetType().GetProperties())
+                {
+                    if (propertyInfo.PropertyType is bool)
+                    {
+                        if (propertyInfo.Attributes.Equals(true))
+                        {
+                            listskills.Add(propertyInfo.Name);
+                        }
+                    }
+                }
+
+                return Ok(skills);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
         [HttpPost("getRace")]
         public IActionResult GetRace([FromBody] OrchidServer.DTO.Character character)
         {
@@ -284,6 +325,9 @@ namespace OrchidServer.Controllers
 
         }
 
+
+        //function
+        //add a race entry and link it to the given user
         [HttpPost("addRace")]
         public IActionResult AddRace([FromBody] OrchidServer.DTO.Race item)
         {
@@ -308,20 +352,47 @@ namespace OrchidServer.Controllers
 
         }
 
+        //function
+        //add a race entry and link it to the given user
         [HttpPost("addSkills")]
-        public IActionResult AddSkills([FromBody] (DTO.Character character, string skill) tuple)
+        public IActionResult AddSkills([FromBody] (OrchidServer.DTO.Character character, OrchidServer.DTO.ProficienciesSkill skills) tuple)
         {
             try
             {
                 HttpContext.Session.Clear(); //Logout any previous login attempt
 
-                //Create model user class
+                //Create model user Race
                 Models.Character modelsCharacter = tuple.character.GetModel();
-                string skill = tuple.skill;
-                modelsCharacter.ProficienciesSkill[skill] = true;
+                Models.ProficienciesSkill modelSkills = tuple.skills.GetModel();
 
-                context.Characters.Update(modelsCharacter);
+
+
+                context.ProficienciesSkills.Add(modelSkills);
                 context.SaveChanges();
+
+                //User was added!
+                DTO.ProficienciesSkill dtoskills = new DTO.ProficienciesSkill(modelSkills);
+                return Ok(dtoskills);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        //function
+        //remove skills table on the given character
+        [HttpPost("removeSkills")]
+        public IActionResult RemoveSkills([FromBody] DTO.Character character)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+                //Create model user class
+                Models.Character modelsCharacter = character.GetModel();
+                context.RemoveSkills(modelsCharacter);
+                //context.SaveChanges(); //is redundent with delete it does that anyway
 
                 return Ok();
             }
@@ -332,6 +403,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //function
+        //remove every class table on the given character
         [HttpPost("removeClasses")]
         public IActionResult RemoveClasses([FromBody] OrchidServer.DTO.Character character)
         {
@@ -354,6 +427,9 @@ namespace OrchidServer.Controllers
 
         }
 
+
+        //function
+        //remove race table on the given character
         [HttpPost("removeRace")]
         public IActionResult RemoveRace([FromBody] OrchidServer.DTO.Character character)
         {

@@ -533,4 +533,7 @@ GO
 SELECT * FROM Class;
 GO
 
+select * from Proficiencies_skills
+go
+
 -- scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=OrchidDB;User ID=OrchidAdminLogin;Password=theOrchid;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context OrchidDbContext -DataAnnotations –force
