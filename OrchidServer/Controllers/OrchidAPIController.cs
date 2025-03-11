@@ -5,7 +5,13 @@ using OrchidServer.DTO;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Dynamic;
 using System.Reflection;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Xml;
+using System.Runtime.CompilerServices;
+using Newtonsoft.Json;
+using System.Security.Cryptography;
 
 namespace OrchidServer.Controllers
 {
@@ -444,6 +450,80 @@ namespace OrchidServer.Controllers
 
                 //User was added!
                 return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        //function
+        //store a Character as jason ind index it with the same index as the cheracter in the db
+        [HttpPost("storeCharacter")]
+        public IActionResult StoreCharacter([FromBody] (dynamic c, int Cid,int Uid) tuple)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+                dynamic Character = tuple.c;
+                int Cid = tuple.Cid;
+                int Uid = tuple.Uid;
+
+
+                string json = JsonConvert.SerializeObject(Character.ToArray(), Newtonsoft.Json.Formatting.Indented);
+
+                //write string to file
+                System.IO.File.WriteAllText($"{this.webHostEnvironment.WebRootPath}\\Chracters\\u{Uid}c{Cid}.json", json);
+
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            
+        }
+
+        //function
+        //get all Character that belong to a given User ID as expandobjects
+        [HttpPost("getAllDynamicCharacters")]
+        public IActionResult getAllDynamicCharacters([FromBody] DTO.AppUser user)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+                Models.AppUser appUser = user.GetModel();
+                List<Models.Character>? ModelCharacters = context.GetAllCharacters(appUser);
+                int Uid = user.Id;
+                List<dynamic> characters = [];
+
+
+                foreach (Models.Character item in ModelCharacters)
+                {
+                    characters.Add(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Chracters\\u{Uid}c{item.Id}.json"));
+                }
+
+                return Ok(characters);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        //function
+        //store a Character as jason ind index it with the same index as the cheracter in the db
+        [HttpPost("storeCharacter")]
+        public IActionResult StoreCharacter([FromBody] (int Cid, int Uid) tuple)
+        {
+            try
+            {
+                int Cid = tuple.Cid;
+                int Uid = tuple.Uid;
+
+                return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Chracters\\u{Uid}c{Cid}.txt"));
             }
             catch (Exception ex)
             {
