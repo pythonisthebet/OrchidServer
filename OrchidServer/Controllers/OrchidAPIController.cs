@@ -13,6 +13,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Security.Cryptography;
+using System.Runtime.InteropServices;
 
 namespace OrchidServer.Controllers
 {
@@ -518,12 +519,13 @@ namespace OrchidServer.Controllers
         //function
         //store a Character as jason ind index it with the same index as the cheracter in the db
         [HttpPost("getDynamicCharacter")]
-        public IActionResult GetDynamicCharacter([FromBody] chToJsonWithUidAndCid ch)
+        public IActionResult GetDynamicCharacter([FromBody] ExpandoObject ch)
         {
             try
             {
-                int Cid = ch.Cid;
-                int Uid = ch.Uid;
+                dynamic item = ch; 
+                int Cid = item.Cid;
+                int Uid = item.Uid;
 
                 return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{Cid}.txt"));
             }
