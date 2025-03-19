@@ -13,7 +13,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Security.Cryptography;
-using System.Runtime.InteropServices;
 
 namespace OrchidServer.Controllers
 {
@@ -523,11 +522,16 @@ namespace OrchidServer.Controllers
         {
             try
             {
-                dynamic item = ch; 
-                int Cid = item.Cid;
-                int Uid = item.Uid;
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+                dynamic temp = ch;
+                var Cid = temp.Cid;
+                var Uid = temp.Uid;
 
-                return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{Cid}.txt"));
+
+                string json = JsonSerializer.Serialize(ch);
+
+                //read string from file
+                return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{Cid}.json"));
             }
             catch (Exception ex)
             {
