@@ -10,7 +10,8 @@ using System.Reflection;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Xml;
 using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
+using System.Text;
+using System.Text.Json;
 using System.Security.Cryptography;
 
 namespace OrchidServer.Controllers
@@ -461,20 +462,21 @@ namespace OrchidServer.Controllers
         //function
         //store a Character as jason ind index it with the same index as the cheracter in the db
         [HttpPost("storeCharacter")]
-        public IActionResult StoreCharacter([FromBody] (dynamic c, int Cid,int Uid) tuple)
+        public IActionResult StoreCharacter([FromBody] ExpandoObject ch)
         {
             try
             {
                 HttpContext.Session.Clear(); //Logout any previous login attempt
-                dynamic Character = tuple.c;
-                int Cid = tuple.Cid;
-                int Uid = tuple.Uid;
+                dynamic temp = ch;
+                dynamic Character = temp.character;
+                var Cid = temp.Cid;
+                var Uid = temp.Uid;
 
 
-                string json = JsonConvert.SerializeObject(Character.ToArray(), Newtonsoft.Json.Formatting.Indented);
+                string json = JsonSerializer.Serialize(ch);
 
                 //write string to file
-                System.IO.File.WriteAllText($"{this.webHostEnvironment.WebRootPath}\\Chracters\\u{Uid}c{Cid}.json", json);
+                System.IO.File.WriteAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{Cid}.json", json);
 
                 return Ok();
             }
@@ -501,7 +503,7 @@ namespace OrchidServer.Controllers
 
                 foreach (Models.Character item in ModelCharacters)
                 {
-                    characters.Add(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Chracters\\u{Uid}c{item.Id}.json"));
+                    characters.Add(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{item.Id}.json"));
                 }
 
                 return Ok(characters);
@@ -515,15 +517,15 @@ namespace OrchidServer.Controllers
 
         //function
         //store a Character as jason ind index it with the same index as the cheracter in the db
-        [HttpPost("storeCharacter")]
-        public IActionResult StoreCharacter([FromBody] (int Cid, int Uid) tuple)
+        [HttpPost("getDynamicCharacter")]
+        public IActionResult GetDynamicCharacter([FromBody] chToJsonWithUidAndCid ch)
         {
             try
             {
-                int Cid = tuple.Cid;
-                int Uid = tuple.Uid;
+                int Cid = ch.Cid;
+                int Uid = ch.Uid;
 
-                return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Chracters\\u{Uid}c{Cid}.txt"));
+                return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{Cid}.txt"));
             }
             catch (Exception ex)
             {
