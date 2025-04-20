@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-[Index("UserEmail", Name = "UQ__AppUsers__08638DF860CF06EC", IsUnique = true)]
+[Index("UserEmail", Name = "UQ__AppUsers__08638DF8A22C7C09", IsUnique = true)]
 public partial class AppUser
 {
     [Key]
@@ -33,9 +33,6 @@ public partial class AppUser
 
     [InverseProperty("User")]
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
-
-    [InverseProperty("Dm")]
-    public virtual ICollection<Party> Parties { get; set; } = new List<Party>();
 
     [InverseProperty("User")]
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();

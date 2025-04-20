@@ -321,252 +321,253 @@ namespace OrchidServer.Controllers
 
         }
 
-        [HttpPost("getAllClasses")]
-        public IActionResult GetAllClasses([FromBody] OrchidServer.DTO.Character character)
-        {
-            try
-            {
-                HttpContext.Session.Clear();
+        //[HttpPost("getAllClasses")]
+        //public IActionResult GetAllClasses([FromBody] OrchidServer.DTO.Character character)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear();
 
-                Models.Character modelCharacter = character.GetModel();
-                List<Models.Class>? ModelClasses = context.GetAllClasses(modelCharacter);
-                List<DTO.Class> DtoClasses = new List<DTO.Class>();
-
-
-                foreach (Models.Class item in ModelClasses)
-                {
-                    DTO.Class placeholderClass = new(item);
-                    DtoClasses.Add(placeholderClass);
-                }
-                return Ok(DtoClasses);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }
+        //        Models.Character modelCharacter = character.GetModel();
+        //        List<Models.Class>? ModelClasses = context.GetAllClasses(modelCharacter);
+        //        List<DTO.Class> DtoClasses = new List<DTO.Class>();
 
 
-        [HttpPost("getSkills")]
-        public IActionResult GetSkills([FromBody] OrchidServer.DTO.Character character)
-        {
-            try
-            {
+        //        foreach (Models.Class item in ModelClasses)
+        //        {
+        //            DTO.Class placeholderClass = new(item);
+        //            DtoClasses.Add(placeholderClass);
+        //        }
+        //        return Ok(DtoClasses);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
 
-                HttpContext.Session.Clear();
+        //}
 
-                Models.Character modelCharacter = character.GetModel();
-                Models.ProficienciesSkill? ModelSkills = context.GetSkills(modelCharacter);
-                DTO.ProficienciesSkill skills = new();
-                List<string> listskills = new();    
-                if (ModelSkills != null)
-                {
-                    DTO.ProficienciesSkill DtoSkills = new DTO.ProficienciesSkill();
 
-                    skills = new(ModelSkills);
-                }
+        //[HttpPost("getSkills")]
+        //public IActionResult GetSkills([FromBody] OrchidServer.DTO.Character character)
+        //{
+        //    try
+        //    {
 
-                foreach (PropertyInfo propertyInfo in skills.GetType().GetProperties())
-                {
-                    if (propertyInfo.PropertyType is bool)
-                    {
-                        if (propertyInfo.Attributes.Equals(true))
-                        {
-                            listskills.Add(propertyInfo.Name);
-                        }
-                    }
-                }
+        //        HttpContext.Session.Clear();
 
-                return Ok(skills);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //        Models.Character modelCharacter = character.GetModel();
+        //        Models.ProficienciesSkill? ModelSkills = context.GetSkills(modelCharacter);
+        //        DTO.ProficienciesSkill skills = new();
+        //        List<string> listskills = new();    
+        //        if (ModelSkills != null)
+        //        {
+        //            DTO.ProficienciesSkill DtoSkills = new DTO.ProficienciesSkill();
 
-        }
+        //            skills = new(ModelSkills);
+        //        }
 
-        [HttpPost("getRace")]
-        public IActionResult GetRace([FromBody] OrchidServer.DTO.Character character)
-        {
-            try
-            {
+        //        foreach (PropertyInfo propertyInfo in skills.GetType().GetProperties())
+        //        {
+        //            if (propertyInfo.PropertyType is bool)
+        //            {
+        //                if (propertyInfo.Attributes.Equals(true))
+        //                {
+        //                    listskills.Add(propertyInfo.Name);
+        //                }
+        //            }
+        //        }
+
+        //        return Ok(skills);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
+
+        //[HttpPost("getRace")]
+        //public IActionResult GetRace([FromBody] OrchidServer.DTO.Character character)
+        //{
+        //    try
+        //    {
                 
-                HttpContext.Session.Clear();
+        //        HttpContext.Session.Clear();
 
-                Models.Character modelCharacter = character.GetModel();
-                Models.Race? ModelRace = context.GetRace(modelCharacter);
-                DTO.Race race = new();
-                if (ModelRace != null)
-                {
-                    DTO.Race DtoRace = new DTO.Race();
+        //        Models.Character modelCharacter = character.GetModel();
+        //        Models.Race? ModelRace = context.GetRace(modelCharacter);
+        //        DTO.Race race = new();
+        //        if (ModelRace != null)
+        //        {
+        //            DTO.Race DtoRace = new DTO.Race();
 
-                    race = new(ModelRace);
-                }
-                return Ok(race);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //            race = new(ModelRace);
+        //        }
+        //        return Ok(race);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
 
-        }
-
-
-        [HttpPost("addClass")]
-        public IActionResult AddClass([FromBody] OrchidServer.DTO.Class item)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
-
-                //Create model user class
-                Models.Class modelsClass = item.GetModel();
-
-                context.Classes.Add(modelsClass);
-                context.SaveChanges();
-
-                //User was added!
-                DTO.Class dtoClass = new DTO.Class(modelsClass);
-                return Ok(dtoClass);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
-        }
+        //}
 
 
-        //function
-        //add a race entry and link it to the given user
-        [HttpPost("addRace")]
-        public IActionResult AddRace([FromBody] OrchidServer.DTO.Race item)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
+        //[HttpPost("addClass")]
+        //public IActionResult AddClass([FromBody] OrchidServer.DTO.Class item)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear(); //Logout any previous login attempt
 
-                //Create model user Race
-                Models.Race modelsRace = item.GetModel();
+        //        //Create model user class
+        //        Models.Class modelsClass = item.GetModel();
 
-                context.Races.Add(modelsRace);
-                context.SaveChanges();
+        //        context.Classes.Add(modelsClass);
+        //        context.SaveChanges();
 
-                //User was added!
-                DTO.Race dtoRace = new DTO.Race(modelsRace);
-                return Ok(dtoRace);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //        //User was added!
+        //        DTO.Class dtoClass = new DTO.Class(modelsClass);
+        //        return Ok(dtoClass);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
 
-        }
-
-        //function
-        //add a race entry and link it to the given user
-        [HttpPost("addSkills")]
-        public IActionResult AddSkills([FromBody] (OrchidServer.DTO.Character character, OrchidServer.DTO.ProficienciesSkill skills) tuple)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
-
-                //Create model user Race
-                Models.Character modelsCharacter = tuple.character.GetModel();
-                Models.ProficienciesSkill modelSkills = tuple.skills.GetModel();
+        //}
 
 
+        ////function
+        ////add a race entry and link it to the given user
+        //[HttpPost("addRace")]
+        //public IActionResult AddRace([FromBody] OrchidServer.DTO.Race item)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear(); //Logout any previous login attempt
 
-                context.ProficienciesSkills.Add(modelSkills);
-                context.SaveChanges();
+        //        //Create model user Race
+        //        Models.Race modelsRace = item.GetModel();
 
-                //User was added!
-                DTO.ProficienciesSkill dtoskills = new DTO.ProficienciesSkill(modelSkills);
-                return Ok(dtoskills);
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //        context.Races.Add(modelsRace);
+        //        context.SaveChanges();
 
-        }
+        //        //User was added!
+        //        DTO.Race dtoRace = new DTO.Race(modelsRace);
+        //        return Ok(dtoRace);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
+
+        ////function
+        ////add a race entry and link it to the given user
+        //[HttpPost("addSkills")]
+        //public IActionResult AddSkills([FromBody] (OrchidServer.DTO.Character character, OrchidServer.DTO.ProficienciesSkill skills) tuple)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear(); //Logout any previous login attempt
+
+        //        //Create model user Race
+        //        Models.Character modelsCharacter = tuple.character.GetModel();
+        //        Models.ProficienciesSkill modelSkills = tuple.skills.GetModel();
+
+
+
+        //        context.ProficienciesSkills.Add(modelSkills);
+        //        context.SaveChanges();
+
+        //        //User was added!
+        //        DTO.ProficienciesSkill dtoskills = new DTO.ProficienciesSkill(modelSkills);
+        //        return Ok(dtoskills);
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
+
+        //}
 
         //function
         //remove skills table on the given character
-        [HttpPost("removeSkills")]
-        public IActionResult RemoveSkills([FromBody] DTO.Character character)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
-                //Create model user class
-                Models.Character modelsCharacter = character.GetModel();
-                context.RemoveSkills(modelsCharacter);
-                //context.SaveChanges(); //is redundent with delete it does that anyway
+        //[HttpPost("removeSkills")]
+        //public IActionResult RemoveSkills([FromBody] DTO.Character character)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear(); //Logout any previous login attempt
+        //        //Create model user class
+        //        Models.Character modelsCharacter = character.GetModel();
+        //        context.RemoveSkills(modelsCharacter);
+        //        //context.SaveChanges(); //is redundent with delete it does that anyway
 
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
 
-        }
+        //}
 
-        //function
-        //remove every class table on the given character
-        [HttpPost("removeClasses")]
-        public IActionResult RemoveClasses([FromBody] OrchidServer.DTO.Character character)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
+        ////function
+        ////remove every class table on the given character
+        //[HttpPost("removeClasses")]
+        //public IActionResult RemoveClasses([FromBody] OrchidServer.DTO.Character character)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear(); //Logout any previous login attempt
 
-                Models.Character modelsCharacter = character.GetModel();
-                context.RemoveAllClasses(modelsCharacter);
+        //        Models.Character modelsCharacter = character.GetModel();
+        //        context.RemoveAllClasses(modelsCharacter);
 
-                //context.SaveChanges(); //is redundent with delete it does that anyway
+        //        //context.SaveChanges(); //is redundent with delete it does that anyway
 
-                //User was added!
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //        //User was added!
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
 
-        }
+        //}
 
 
-        //function
-        //remove race table on the given character
-        [HttpPost("removeRace")]
-        public IActionResult RemoveRace([FromBody] OrchidServer.DTO.Character character)
-        {
-            try
-            {
-                HttpContext.Session.Clear(); //Logout any previous login attempt
+        ////function
+        ////remove race table on the given character
+        //[HttpPost("removeRace")]
+        //public IActionResult RemoveRace([FromBody] OrchidServer.DTO.Character character)
+        //{
+        //    try
+        //    {
+        //        HttpContext.Session.Clear(); //Logout any previous login attempt
 
-                Models.Character modelsCharacter = character.GetModel();
-                context.RemoveRace(modelsCharacter);
+        //        Models.Character modelsCharacter = character.GetModel();
+        //        context.RemoveRace(modelsCharacter);
 
-                //context.SaveChanges(); //is redundent with delete it does that anyway
+        //        //context.SaveChanges(); //is redundent with delete it does that anyway
 
-                //User was added!
-                return Ok();
-            }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+        //        //User was added!
+        //        return Ok();
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return BadRequest(ex.Message);
+        //    }
 
-        }
+        //}
 
         //function
         //store a Character as jason ind index it with the same index as the cheracter in the db
+
         [HttpPost("storeCharacter")]
         public IActionResult StoreCharacter([FromBody] ExpandoObject ch)
         {

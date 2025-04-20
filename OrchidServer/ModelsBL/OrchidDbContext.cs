@@ -29,34 +29,34 @@ public partial class OrchidDbContext : DbContext
         return this.Characters.Where(u => u.User == user).ToList();
     }
 
-    public List<Class>? GetAllClasses(Character character)
-    {
-        return this.Classes.Where(u => u.CharacterId == character.Id).ToList();
-    }
+    //public List<Class>? GetAllClasses(Character character)
+    //{
+    //    return this.Classes.Where(u => u.CharacterId == character.Id).ToList();
+    //}
 
-    public Race? GetRace(Character character)
-    {
-        return this.Races.Where(u => u.Id == character.Id).FirstOrDefault();
-    }
+    //public Race? GetRace(Character character)
+    //{
+    //    return this.Races.Where(u => u.Id == character.Id).FirstOrDefault();
+    //}
 
-    public ProficienciesSkill? GetSkills(Character character)
-    {
-        return this.ProficienciesSkills.Where(u => u.Id == character.Id).FirstOrDefault();
-    }
+    //public ProficienciesSkill? GetSkills(Character character)
+    //{
+    //    return this.ProficienciesSkills.Where(u => u.Id == character.Id).FirstOrDefault();
+    //}
 
-    public void RemoveAllClasses(Character character)
-    {
-        this.Classes.Where(u => u.CharacterId == character.Id).ExecuteDelete();
-    }
+    //public void RemoveAllClasses(Character character)
+    //{
+    //    this.Classes.Where(u => u.CharacterId == character.Id).ExecuteDelete();
+    //}
 
-    public void RemoveRace(Character character)
-    {
-        this.Races.Where(u => u.Id == character.Id).ExecuteDelete();
-    }
+    //public void RemoveRace(Character character)
+    //{
+    //    this.Races.Where(u => u.Id == character.Id).ExecuteDelete();
+    //}
 
-    public void RemoveSkills(Character character)
-    {
-        this.ProficienciesSkills.Where(u => u.Id == character.Id).ExecuteDelete();
-    }
+    //public void RemoveSkills(Character character)
+    //{
+    //    this.ProficienciesSkills.Where(u => u.Id == character.Id).ExecuteDelete();
+    //}
 }
 
