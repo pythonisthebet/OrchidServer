@@ -175,6 +175,13 @@ Go
 Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1, 1)
 Go
 
+Insert Into Filters Values('Support')
+Insert Into Filters Values('DPS')
+Insert Into Filters Values('Tank')
+Insert Into Filters Values('Low_Level')
+Insert Into Filters Values('High_Level')
+Go
+
 SELECT * FROM AppUsers;
 GO
 
