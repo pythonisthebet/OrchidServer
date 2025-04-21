@@ -29,6 +29,23 @@ public partial class OrchidDbContext : DbContext
         return this.Characters.Where(u => u.User == user).ToList();
     }
 
+    public List<Filter>? GetAllFilters()
+    {
+        return this.Filters.ToList();
+    }
+
+    public List<Character>? GetCharactersFORFilters(List<Filter> list)
+    {
+        List<int?> ids = new List<int?>();
+        foreach (var filter in list) 
+        {
+            ids.Add(filter.Id);
+        }
+        return this.Characters
+        .Where(c => c.FiltersToCharacters.Count(f => ids.Contains(f.FilterId)) == ids.Count)
+        .ToList();;
+    }
+
     //public List<Class>? GetAllClasses(Character character)
     //{
     //    return this.Classes.Where(u => u.CharacterId == character.Id).ToList();

@@ -321,6 +321,63 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("getCharactersFORFilters")]
+        public IActionResult GetCharactersFORFilters([FromBody] List<OrchidServer.DTO.Filter> filterList)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+                List<Models.Filter> list = new List<Models.Filter>();
+
+                foreach (var filter in filterList) 
+                {
+                    list.Add(filter.GetModel());
+
+                }
+                List<Models.Character>? ModelCharacters = context.GetCharactersFORFilters(list);
+                List<DTO.Character> DtoCharacters = new List<DTO.Character>();
+
+
+                foreach (Models.Character character in ModelCharacters)
+                {
+                    DTO.Character placeholderuser = new(character);
+                    DtoCharacters.Add(placeholderuser);
+                }
+                return Ok(DtoCharacters);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("getAllFilters")]
+        public IActionResult GetAllFilters()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+                List<Models.Filter> ModelFilters = context.GetAllFilters(); ;
+                List<DTO.Filter> DtoFilters = new List<DTO.Filter>();
+
+
+                foreach (Models.Filter filter in ModelFilters)
+                {
+                    DTO.Filter placeholderFilters = new(filter);
+                    DtoFilters.Add(placeholderFilters);
+                }
+                return Ok(DtoFilters);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
         //[HttpPost("getAllClasses")]
         //public IActionResult GetAllClasses([FromBody] OrchidServer.DTO.Character character)
         //{
@@ -392,7 +449,7 @@ namespace OrchidServer.Controllers
         //{
         //    try
         //    {
-                
+
         //        HttpContext.Session.Clear();
 
         //        Models.Character modelCharacter = character.GetModel();
