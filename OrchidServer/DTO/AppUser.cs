@@ -19,6 +19,8 @@ public class AppUser
 
     public bool IsPremium { get; set; }
 
+    public DateTime PremiumUntil { get; set; }
+
     public bool IsAdmin { get; set; }
 
     public AppUser() { }
@@ -30,6 +32,7 @@ public class AppUser
         this.UserPassword = model.UserPassword;
         this.IsAdmin = model.IsAdmin;
         this.IsPremium = model.IsPremium;
+        this.PremiumUntil = model.PremiumUntil;
     }
 
     public Models.AppUser GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
@@ -40,6 +43,7 @@ public class AppUser
         newModel.UserEmail = this.UserEmail;
         newModel.UserPassword = this.UserPassword;
         newModel.IsPremium = this.IsPremium;
+        newModel.PremiumUntil = this.PremiumUntil;
         newModel.IsAdmin = this.IsAdmin;
         return newModel;
     }
