@@ -704,6 +704,30 @@ namespace OrchidServer.Controllers
 
         }
 
+        //function
+        //store a Character as jason ind index it with the same index as the cheracter in the db
+        [HttpPost("getJsonCharacter")]
+        public IActionResult GetJsonCharacter([FromBody] ExpandoObject ch)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+                dynamic temp = ch;
+                var Cid = temp.Cid;
+                var Uid = temp.Uid;
+
+
+                string json = JsonSerializer.Serialize(ch);
+
+                //read string from file
+                return Ok(System.IO.File.ReadAllText($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{Uid}c{Cid}.json"));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
 
