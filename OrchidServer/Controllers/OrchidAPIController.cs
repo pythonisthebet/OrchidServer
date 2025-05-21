@@ -728,6 +728,27 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //function
+        //Get the Id of a user that has a given character
+        [HttpPost("getUserId")]
+        public IActionResult GetUserId([FromBody] OrchidServer.DTO.Character character)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+                Models.Character appUser = character.GetModel();
+                int Uid = context.GetUserId(appUser);
+                return Ok(Uid);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }
 

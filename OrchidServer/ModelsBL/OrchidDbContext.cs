@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using OrchidServer.DTO;
 
@@ -44,6 +45,10 @@ public partial class OrchidDbContext : DbContext
         return this.Characters
         .Where(c => c.FiltersToCharacters.Count(f => ids.Contains(f.FilterId)) == ids.Count)
         .ToList();;
+    }
+    public int? GetUserId(Character character)
+    {
+        return this.AppUsers.Where(c => c.Characters.Contains(character)).FirstOrDefault().Id;
     }
 
     //public List<Class>? GetAllClasses(Character character)
