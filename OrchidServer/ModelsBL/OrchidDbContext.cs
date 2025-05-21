@@ -46,7 +46,7 @@ public partial class OrchidDbContext : DbContext
         .Where(c => c.FiltersToCharacters.Count(f => ids.Contains(f.FilterId)) == ids.Count)
         .ToList();;
     }
-    public int? GetUserId(Character character)
+    public int GetUserId(Character character)
     {
         return this.AppUsers.Where(c => c.Characters.Contains(character)).FirstOrDefault().Id;
     }
