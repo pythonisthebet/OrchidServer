@@ -7,28 +7,29 @@ using Microsoft.EntityFrameworkCore;
 using OrchidServer.Models;
 namespace OrchidServer.DTO;
 
-public class Appeal
+public class BanReason
 {
     public int Id { get; set; }
 
     public int? UserId { get; set; }
-    public string Explanation { get; set; } = null!;
+    public string Reason { get; set; } = null!;
 
-    public Appeal() { }
-    public Appeal(Models.Appeal modelAppeal)
+    public BanReason() { }
+    public BanReason(Models.BanReason modelAppeal)
     {
         this.Id = modelAppeal.Id;
         this.UserId = modelAppeal.UserId;
-        this.Explanation = modelAppeal.Explanation;
+        this.Reason = modelAppeal.Reason;
     }
 
-    public Models.Appeal GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.BanReason GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
     {
-        Models.Appeal newModel = new Models.Appeal();
+        Models.BanReason newModel = new Models.BanReason();
         newModel.Id = this.Id;
         newModel.UserId = this.UserId;
-        newModel.Explanation = this.Explanation;
+        newModel.Reason = this.Reason;
 
         return newModel;
     }
 }
+

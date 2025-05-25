@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace OrchidServer.Models;
 
-public partial class Appeal
+public partial class BanReason
 {
     [Key]
     public int Id { get; set; }
@@ -14,9 +14,9 @@ public partial class Appeal
     public int? UserId { get; set; }
 
     [StringLength(4000)]
-    public string Explanation { get; set; } = null!;
+    public string Reason { get; set; } = null!;
 
     [ForeignKey("UserId")]
-    [InverseProperty("Appeals")]
+    [InverseProperty("BanReasons")]
     public virtual AppUser? User { get; set; }
 }

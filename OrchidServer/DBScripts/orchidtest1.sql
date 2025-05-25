@@ -78,6 +78,32 @@ FName nvarchar(20) Not Null,
 )
 
 -- Table
+-- Every Ban Reason an admin gave for said banning of user in the app
+
+
+Create Table BanReasons
+(
+
+Id int Primary Key Identity,
+
+UserId int Foreign Key References AppUsers(Id),
+
+Reason nvarchar(4000) Not Null,
+
+)
+
+Create Table Appeals
+(
+
+Id int Primary Key Identity,
+
+UserId int Foreign Key References AppUsers(Id),
+
+Explanation nvarchar(4000) Not Null
+
+)
+
+-- Table
 -- Every link between a character and a filter can use in the app
 
 
@@ -96,75 +122,76 @@ FilterId int Foreign Key References Filters(Id),
 -- Every Forum in the app
 
 
-Create Table Forums
-(
+--Create Table Forums
+--(
 
-Id int Primary Key Identity,
+--Id int Primary Key Identity,
 
-FName nvarchar(20) Not Null,
+--FName nvarchar(20) Not Null,
 
-)
+--)
 
 -- Table
 -- Every Post in the app
 
 
-Create Table Posts
-(
+--Create Table Posts
+--(
 
-Id int Primary Key Identity,
+--Id int Primary Key Identity,
 
-UserId int Foreign Key References AppUsers(Id),
+--UserId int Foreign Key References AppUsers(Id),
 
-Title nvarchar(20) Not Null,
+--Title nvarchar(20) Not Null,
 
-Forum int Foreign Key References Forums(Id),
+--Forum int Foreign Key References Forums(Id),
 
-PostBody nvarchar(1000) Not Null,
+--PostBody nvarchar(1000) Not Null,
 
-Likes int Default 0,
+--Likes int Default 0,
 
-PViews int Default 0,
+--PViews int Default 0,
 
-)
+--)
 
 -- Table
 -- Every Comment for Post in the app
 
 
-Create Table Comments
-(
+--Create Table Comments
+--(
 
-Id int Primary Key Identity,
+--Id int Primary Key Identity,
 
-UserId int Foreign Key References AppUsers(Id),
+--UserId int Foreign Key References AppUsers(Id),
 
-PostId int Foreign Key References Posts(Id),
+--PostId int Foreign Key References Posts(Id),
 
-CommentBody nvarchar(1000) Not Null,
+--CommentBody nvarchar(1000) Not Null,
 
-Likes int Default 0
+--Likes int Default 0
 
-)
+--)
 
 -- Table
 -- Every Appeal for getting unbanned from the forums
 
 
-Create Table Appeals
-(
+--Create Table Appeals
+--(
 
-Id int Primary Key Identity,
+--Id int Primary Key Identity,
 
-UserId int Foreign Key References AppUsers(Id),
+--UserId int Foreign Key References AppUsers(Id),
 
-Reason nvarchar(100) Not Null,
+--Reason nvarchar(100) Not Null,
 
-Explanation nvarchar(100) Not Null,
+--Explanation nvarchar(100) Not Null,
 
-)
+--)
 
 -- Create a login for the admin user
+
 CREATE LOGIN [OrchidAdminLogin] WITH PASSWORD = 'theOrchid';
 Go
 
@@ -177,6 +204,7 @@ ALTER ROLE db_owner ADD MEMBER [OrchidAdminUser];
 Go
 
 Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1,(3000) ,1, 0)
+Insert Into AppUsers Values('test2', 'test2@gmail.com', 'test2222', 1,(3000) ,1, 1)
 Go
 
 Insert Into Filters Values('Support')
