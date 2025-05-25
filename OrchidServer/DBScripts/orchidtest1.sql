@@ -35,7 +35,9 @@ IsPremium bit Not Null Default 0,
 
 PremiumUntil DateTime not Null Default 0,
 
-IsAdmin bit Not Null Default 0
+IsAdmin bit Not Null Default 0,
+
+IsBanned bit Not Null Default 0
 
 )
 
@@ -174,7 +176,7 @@ Go
 ALTER ROLE db_owner ADD MEMBER [OrchidAdminUser];
 Go
 
-Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1,(3000) ,1)
+Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1,(3000) ,1, 0)
 Go
 
 Insert Into Filters Values('Support')

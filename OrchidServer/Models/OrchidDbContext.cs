@@ -39,67 +39,67 @@ public partial class OrchidDbContext : DbContext
     {
         modelBuilder.Entity<AppUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__AppUsers__3214EC073512359D");
+            entity.HasKey(e => e.Id).HasName("PK__AppUsers__3214EC078E70D98A");
 
             entity.Property(e => e.PremiumUntil).HasDefaultValueSql("((0))");
         });
 
         modelBuilder.Entity<Appeal>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Appeals__3214EC071907DB99");
+            entity.HasKey(e => e.Id).HasName("PK__Appeals__3214EC070965E75A");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Appeals).HasConstraintName("FK__Appeals__UserId__403A8C7D");
+            entity.HasOne(d => d.User).WithMany(p => p.Appeals).HasConstraintName("FK__Appeals__UserId__412EB0B6");
         });
 
         modelBuilder.Entity<Character>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Characte__3214EC07F208192D");
+            entity.HasKey(e => e.Id).HasName("PK__Characte__3214EC0744A2A46F");
 
             entity.Property(e => e.LevelValue).HasDefaultValue(1);
 
-            entity.HasOne(d => d.User).WithMany(p => p.Characters).HasConstraintName("FK__Character__UserI__2A4B4B5E");
+            entity.HasOne(d => d.User).WithMany(p => p.Characters).HasConstraintName("FK__Character__UserI__2B3F6F97");
         });
 
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC0786946B24");
+            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC073F2A2793");
 
             entity.Property(e => e.Likes).HasDefaultValue(0);
 
-            entity.HasOne(d => d.Post).WithMany(p => p.Comments).HasConstraintName("FK__Comments__PostId__3C69FB99");
+            entity.HasOne(d => d.Post).WithMany(p => p.Comments).HasConstraintName("FK__Comments__PostId__3D5E1FD2");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Comments).HasConstraintName("FK__Comments__UserId__3B75D760");
+            entity.HasOne(d => d.User).WithMany(p => p.Comments).HasConstraintName("FK__Comments__UserId__3C69FB99");
         });
 
         modelBuilder.Entity<Filter>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Filters__3214EC073AC6F1A6");
+            entity.HasKey(e => e.Id).HasName("PK__Filters__3214EC0741689E88");
         });
 
         modelBuilder.Entity<FiltersToCharacter>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__FiltersT__3214EC07E912C036");
+            entity.HasKey(e => e.Id).HasName("PK__FiltersT__3214EC0713045ED1");
 
-            entity.HasOne(d => d.Character).WithMany(p => p.FiltersToCharacters).HasConstraintName("FK__FiltersTo__Chara__300424B4");
+            entity.HasOne(d => d.Character).WithMany(p => p.FiltersToCharacters).HasConstraintName("FK__FiltersTo__Chara__30F848ED");
 
-            entity.HasOne(d => d.Filter).WithMany(p => p.FiltersToCharacters).HasConstraintName("FK__FiltersTo__Filte__30F848ED");
+            entity.HasOne(d => d.Filter).WithMany(p => p.FiltersToCharacters).HasConstraintName("FK__FiltersTo__Filte__31EC6D26");
         });
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC07317FB558");
+            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC07E4560A8E");
         });
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC0729F94F31");
+            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC07D3041DF2");
 
             entity.Property(e => e.Likes).HasDefaultValue(0);
             entity.Property(e => e.Pviews).HasDefaultValue(0);
 
-            entity.HasOne(d => d.ForumNavigation).WithMany(p => p.Posts).HasConstraintName("FK__Posts__Forum__36B12243");
+            entity.HasOne(d => d.ForumNavigation).WithMany(p => p.Posts).HasConstraintName("FK__Posts__Forum__37A5467C");
 
-            entity.HasOne(d => d.User).WithMany(p => p.Posts).HasConstraintName("FK__Posts__UserId__35BCFE0A");
+            entity.HasOne(d => d.User).WithMany(p => p.Posts).HasConstraintName("FK__Posts__UserId__36B12243");
         });
 
         OnModelCreatingPartial(modelBuilder);

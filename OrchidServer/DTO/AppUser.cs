@@ -23,6 +23,8 @@ public class AppUser
 
     public bool IsAdmin { get; set; }
 
+    public bool IsBanned { get; set; }
+
     public AppUser() { }
     public AppUser(Models.AppUser model)
     {
@@ -31,6 +33,7 @@ public class AppUser
         this.UserEmail = model.UserEmail;
         this.UserPassword = model.UserPassword;
         this.IsAdmin = model.IsAdmin;
+        this.IsBanned = model.IsBanned;
         this.IsPremium = model.IsPremium;
         this.PremiumUntil = model.PremiumUntil;
     }
@@ -45,6 +48,7 @@ public class AppUser
         newModel.IsPremium = this.IsPremium;
         newModel.PremiumUntil = this.PremiumUntil;
         newModel.IsAdmin = this.IsAdmin;
+        newModel.IsBanned= this.IsBanned;
         return newModel;
     }
 }
