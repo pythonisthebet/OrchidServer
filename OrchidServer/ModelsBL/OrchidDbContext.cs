@@ -51,6 +51,18 @@ public partial class OrchidDbContext : DbContext
         return this.AppUsers.Where(c => c.Characters.Contains(character)).FirstOrDefault().Id;
     }
 
+    public string GetAppeal(AppUser user)
+    {
+        Appeal appeal = this.Appeals.Where(c => c.UserId == user.Id).FirstOrDefault();
+        return appeal.Explanation;
+    }
+
+    public string GetBanReason(AppUser user)
+    {
+        BanReason banReason = this.BanReasons.Where(c => c.UserId == user.Id).FirstOrDefault();
+        return banReason.Reason;
+    }
+
     //public List<Class>? GetAllClasses(Character character)
     //{
     //    return this.Classes.Where(u => u.CharacterId == character.Id).ToList();

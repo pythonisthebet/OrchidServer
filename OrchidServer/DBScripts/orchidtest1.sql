@@ -207,6 +207,9 @@ Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1,(3000) ,1,
 Insert Into AppUsers Values('test2', 'test2@gmail.com', 'test2222', 1,(3000) ,1, 1)
 Go
 
+Insert Into BanReasons Values(2,'test Reason')
+Go
+
 Insert Into Filters Values('Support')
 Insert Into Filters Values('DPS')
 Insert Into Filters Values('Tank')
@@ -218,6 +221,9 @@ SELECT * FROM AppUsers;
 GO
 
 SELECT * FROM Characters;
+GO
+
+SELECT * FROM Appeals;
 GO
 
 SELECT * FROM FiltersToCharacter;

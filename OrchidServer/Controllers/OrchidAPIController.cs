@@ -801,6 +801,112 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("unbanUser")]
+        public IActionResult UnbanUser([FromBody] OrchidServer.DTO.AppUser userDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                userDto.IsBanned = false;
+                Models.AppUser modelsUser = userDto.GetModel();
+
+                context.AppUsers.Update(modelsUser);
+                context.SaveChanges();
+
+                //User was added!
+                return Ok(modelsUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("getBanReason")]
+        public IActionResult GetBanReason([FromBody] OrchidServer.DTO.AppUser userDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                Models.AppUser modelsUser = userDto.GetModel();
+
+                return Ok(context.GetBanReason(modelsUser));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("getAppeal")]
+        public IActionResult GetAppeal([FromBody] OrchidServer.DTO.AppUser userDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+                Models.AppUser modelsUser = userDto.GetModel();
+                return Ok(context.GetAppeal(modelsUser));
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("setAppeal")]
+        public IActionResult SetAppeal([FromBody] OrchidServer.DTO.Appeal appealDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.Appeal modelsAppeal = appealDto.GetModel();
+
+                context.Appeals.Where(x => x.UserId == appealDto.UserId).ExecuteDelete();
+                context.Appeals.Add(modelsAppeal);
+                context.SaveChanges();
+
+                //User was added!
+                DTO.Appeal dtoAppealDto = new DTO.Appeal(modelsAppeal);
+                return Ok(dtoAppealDto);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("setBanReason")]
+        public IActionResult SetBanReason([FromBody] OrchidServer.DTO.BanReason banReasonDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.BanReason modelsbanReason = banReasonDto.GetModel();
+
+                context.BanReasons.Where(x => x.UserId == banReasonDto.UserId).ExecuteDelete();
+                context.BanReasons.Add(modelsbanReason);
+                context.SaveChanges();
+
+                //User was added!
+                DTO.BanReason dtobanReason = new DTO.BanReason(modelsbanReason);
+                return Ok(dtobanReason);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
 
