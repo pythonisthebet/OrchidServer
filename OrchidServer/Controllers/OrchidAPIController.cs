@@ -749,6 +749,58 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("updateCharFilters")]
+        public IActionResult UpdateCharFilters([FromBody] OrchidServer.DTO.ChPlusFilters chFDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                DTO.Character chDto = chFDto.Character;
+                List<DTO.Filter> filters = chFDto.Filters;
+                List<int> FiltersIds = new();
+                foreach (var item in filters)
+                {
+                    FiltersIds.Add(item.Id);
+                }
+
+
+                foreach (int filterId in FiltersIds)
+                {
+                    var existingRelation = context.FiltersToCharacters
+                        .FirstOrDefault(ftc => ftc.CharacterId == chDto.Id && ftc.FilterId == filterId);
+
+                    if (existingRelation == null)
+                    {
+                        var dto = new DTO.FiltersToCharacter
+                        {
+                            CharacterId = chDto.Id,
+                            FilterId = filterId
+                        };
+
+                        // Convert DTO to model and add to context
+                        var model = dto.GetModel();
+                        context.FiltersToCharacters.Add(model);
+                    }
+                }
+                    context.SaveChanges();
+
+                    //context.Characters.Where(x => x.Id == chDto.Id).FirstOrDefault().FiltersToCharacters.Add(context.Filters);
+
+                    //context.AppUsers.Update(modelsUser);
+                    //context.SaveChanges();
+
+                    //User was added!
+                    return Ok();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
     }
 }
 

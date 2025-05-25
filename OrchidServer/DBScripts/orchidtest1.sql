@@ -190,4 +190,7 @@ GO
 SELECT * FROM Characters;
 GO
 
+SELECT * FROM FiltersToCharacter;
+GO
+
 -- scaffold-DbContext "Server = (localdb)\MSSQLLocalDB;Initial Catalog=OrchidDB;User ID=OrchidAdminLogin;Password=theOrchid;" Microsoft.EntityFrameworkCore.SqlServer -OutPutDir Models -Context OrchidDbContext -DataAnnotations –force
