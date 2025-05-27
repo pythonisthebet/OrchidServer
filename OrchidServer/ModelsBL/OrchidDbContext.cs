@@ -68,6 +68,11 @@ public partial class OrchidDbContext : DbContext
         return this.Appeals.ToList();
     }
 
+    public List<Character>? GetAllCharactersA()
+    {
+        return this.Characters.ToList();
+    }
+
     //public List<Class>? GetAllClasses(Character character)
     //{
     //    return this.Classes.Where(u => u.CharacterId == character.Id).ToList();

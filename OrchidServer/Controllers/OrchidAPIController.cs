@@ -14,6 +14,7 @@ using System.Text;
 using System.Text.Json;
 using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
+using System;
 
 namespace OrchidServer.Controllers
 {
@@ -954,6 +955,57 @@ namespace OrchidServer.Controllers
                     Dtousers.Add(placeholderuser);
                 }
                 return Ok(Dtousers);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("deleteCharacter")]
+        public IActionResult DeleteCharacter([FromBody] OrchidServer.DTO.Character charDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.Character modelsCharacter = charDto.GetModel();
+                System.IO.File.Delete($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{charDto.UserId}c{charDto}.json");
+
+
+                context.Characters.Remove(modelsCharacter);
+                context.SaveChanges();
+
+                //User was added!
+                return Ok(modelsCharacter);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpGet("getAllCharacters")]
+        public IActionResult GetAllCharacters()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+
+                List<Models.Character>? Modelcharacters = context.GetAllCharactersA();
+                List<DTO.Character> Dtocharacters = new List<DTO.Character>();
+
+
+                foreach (Models.Character character in Modelcharacters)
+                {
+                    DTO.Character placeholderuser = new(character);
+                    Dtocharacters.Add(placeholderuser);
+                }
+                return Ok(Dtocharacters);
             }
             catch (Exception ex)
             {
