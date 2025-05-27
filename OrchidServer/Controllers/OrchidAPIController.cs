@@ -825,6 +825,30 @@ namespace OrchidServer.Controllers
 
         }
 
+        [HttpPost("banUser")]
+        public IActionResult BanUser([FromBody] OrchidServer.DTO.AppUser userDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                userDto.IsBanned = true;
+                Models.AppUser modelsUser = userDto.GetModel();
+
+                context.AppUsers.Update(modelsUser);
+                context.SaveChanges();
+
+                //User was added!
+                return Ok(modelsUser);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
         [HttpPost("getBanReason")]
         public IActionResult GetBanReason([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -918,9 +942,13 @@ namespace OrchidServer.Controllers
 
                 List<Models.AppUser>? Modelusers = context.GetAllUsersC().Where(x => x.IsBanned == true).ToList();
                 List<DTO.AppUser> Dtousers = new List<DTO.AppUser>();
+                List<Models.Appeal> appeals = context.GetAllAppeals();
+                List<Models.AppUser> usersWithAppeals = Modelusers
+                .Where(user => appeals.Any(appeal => appeal.UserId == user.Id))
+                .ToList();
 
 
-                foreach (Models.AppUser user in Modelusers)
+                foreach (Models.AppUser user in usersWithAppeals)
                 {
                     DTO.AppUser placeholderuser = new(user);
                     Dtousers.Add(placeholderuser);

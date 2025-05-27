@@ -63,6 +63,11 @@ public partial class OrchidDbContext : DbContext
         return banReason.Reason;
     }
 
+    public List<Appeal>? GetAllAppeals()
+    {
+        return this.Appeals.ToList();
+    }
+
     //public List<Class>? GetAllClasses(Character character)
     //{
     //    return this.Classes.Where(u => u.CharacterId == character.Id).ToList();
