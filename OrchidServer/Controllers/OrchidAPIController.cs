@@ -907,6 +907,32 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        [HttpGet("getBannedUsers")]
+        public IActionResult GetBannedUsers()
+        {
+            try
+            {
+                HttpContext.Session.Clear();
+
+
+                List<Models.AppUser>? Modelusers = context.GetAllUsersC().Where(x => x.IsBanned == true).ToList();
+                List<DTO.AppUser> Dtousers = new List<DTO.AppUser>();
+
+
+                foreach (Models.AppUser user in Modelusers)
+                {
+                    DTO.AppUser placeholderuser = new(user);
+                    Dtousers.Add(placeholderuser);
+                }
+                return Ok(Dtousers);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
     }
 }
 
