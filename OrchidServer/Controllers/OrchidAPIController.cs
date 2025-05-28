@@ -36,6 +36,7 @@ namespace OrchidServer.Controllers
 
         [HttpGet]
         [Route("TestServer")]
+        //test if server is responsive
         public ActionResult<string> TestServer()
         {
             return Ok("Server Responded Successfully");
@@ -43,6 +44,7 @@ namespace OrchidServer.Controllers
 
         //Helper functions
         #region Backup / Restore
+        //backs up the data base to a file
         [HttpGet("Backup")]
         public async Task<IActionResult> Backup()
         {
@@ -59,6 +61,7 @@ namespace OrchidServer.Controllers
             }
         }
 
+        //restore the data base from a file
         [HttpGet("Restore")]
         public async Task<IActionResult> Restore()
         {
@@ -145,7 +148,7 @@ namespace OrchidServer.Controllers
         }
         #endregion
 
-
+        //check if login information is current if so return the appuser object they are for
         [HttpPost("login")]
         public IActionResult Login([FromBody] DTO.LoginInfo loginDto)
         {
@@ -175,6 +178,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //creates a new user in the database using the given data and return it
+
         [HttpPost("register")]
         public IActionResult Register([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -199,6 +204,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //update the data of a user
+
         [HttpPost("updateUser")]
         public IActionResult UpdateUser([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -221,6 +228,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //update the data of a character
 
         [HttpPost("updateCharacter")]
         public IActionResult UpdateCharacter([FromBody] OrchidServer.DTO.Character characterDto)
@@ -253,6 +262,7 @@ namespace OrchidServer.Controllers
             return path;
         }
 
+        //returns all users in the data base
         [HttpGet("getAllUsers")]
         public IActionResult GetAllUsers()
         {
@@ -279,6 +289,7 @@ namespace OrchidServer.Controllers
 
         }
 
+        //return all chracters of a given user
         [HttpPost("getAllCharacters")]
         public IActionResult GetAllCharacters([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -305,6 +316,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //create a new chracter and return it to the app
+
         [HttpPost("createCharacter")]
         public IActionResult CreateCharacter([FromBody] OrchidServer.DTO.Character character)
         {
@@ -328,6 +341,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //gets all characters that have the given filters
 
         [HttpPost("getCharactersFORFilters")]
         public IActionResult GetCharactersFORFilters([FromBody] List<OrchidServer.DTO.Filter> filterList)
@@ -361,6 +376,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //return all filters in the database to the app
+
         [HttpPost("getAllFilters")]
         public IActionResult GetAllFilters()
         {
@@ -385,6 +402,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        #region removed
 
         //[HttpPost("getAllClasses")]
         //public IActionResult GetAllClasses([FromBody] OrchidServer.DTO.Character character)
@@ -629,9 +648,9 @@ namespace OrchidServer.Controllers
         //    }
 
         //}
+        #endregion
 
-        //function
-        //store a Character as jason ind index it with the same index as the cheracter in the db
+        //store a Character as json ind index it with the same index as the cheracter in the database
 
         [HttpPost("storeCharacter")]
         public IActionResult StoreCharacter([FromBody] ExpandoObject ch)
@@ -659,8 +678,7 @@ namespace OrchidServer.Controllers
             
         }
 
-        //function
-        //get all Character that belong to a given User ID as expandobjects
+        //get all Characters that belong to a given User as expandobjects
         [HttpPost("getAllDynamicCharacters")]
         public IActionResult getAllDynamicCharacters([FromBody] DTO.AppUser user)
         {
@@ -687,8 +705,7 @@ namespace OrchidServer.Controllers
 
         }
 
-        //function
-        //store a Character as jason ind index it with the same index as the cheracter in the db
+        //store a Character as json and index it with the same index as the cheracter in the db
         [HttpPost("getDynamicCharacter")]
         public IActionResult GetDynamicCharacter([FromBody] ExpandoObject ch)
         {
@@ -712,8 +729,7 @@ namespace OrchidServer.Controllers
 
         }
 
-        //function
-        //store a Character as jason ind index it with the same index as the cheracter in the db
+        //store a Character as json ind index it with the same index as the cheracter in the db
         [HttpPost("getJsonCharacter")]
         public IActionResult GetJsonCharacter([FromBody] ExpandoObject ch)
         {
@@ -737,7 +753,6 @@ namespace OrchidServer.Controllers
 
         }
 
-        //function
         //Get the Id of a user that has a given character
         [HttpPost("getUserId")]
         public IActionResult GetUserId([FromBody] OrchidServer.DTO.Character character)
@@ -756,6 +771,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //update the filters that a chracter has
 
         [HttpPost("updateCharFilters")]
         public IActionResult UpdateCharFilters([FromBody] OrchidServer.DTO.ChPlusFilters chFDto)
@@ -809,6 +826,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //unban a user
+
         [HttpPost("unbanUser")]
         public IActionResult UnbanUser([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -833,6 +852,7 @@ namespace OrchidServer.Controllers
 
         }
 
+        //ban a user
         [HttpPost("banUser")]
         public IActionResult BanUser([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -857,6 +877,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //get the reason a user was banned by an admin
+
         [HttpPost("getBanReason")]
         public IActionResult GetBanReason([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -874,6 +896,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //get the explanation a user gave to why they should be unbanned
+
         [HttpPost("getAppeal")]
         public IActionResult GetAppeal([FromBody] OrchidServer.DTO.AppUser userDto)
         {
@@ -889,6 +913,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //set the explanation a user gave to why they should be unbanned
 
         [HttpPost("setAppeal")]
         public IActionResult SetAppeal([FromBody] OrchidServer.DTO.Appeal appealDto)
@@ -915,6 +941,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //set the reason an admin banned a user
+
         [HttpPost("setBanReason")]
         public IActionResult SetBanReason([FromBody] OrchidServer.DTO.BanReason banReasonDto)
         {
@@ -939,6 +967,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //get a list of every banned user that made an appeal to get un banned
 
         [HttpGet("getBannedUsers")]
         public IActionResult GetBannedUsers()
@@ -970,6 +1000,8 @@ namespace OrchidServer.Controllers
 
         }
 
+        //delete a character from the data base and thier json file
+
         [HttpPost("deleteCharacter")]
         public IActionResult DeleteCharacter([FromBody] OrchidServer.DTO.Character charDto)
         {
@@ -994,6 +1026,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //get every character in the data base
 
         [HttpGet("getAllCharacters")]
         public IActionResult GetAllCharacters()
@@ -1020,6 +1054,8 @@ namespace OrchidServer.Controllers
             }
 
         }
+
+        //send a prompt to openAIservice to produce a picture and send it (the picture :) ps its 1 AM and im very tired) to the user
 
         [HttpPost("sendPrompt")]
         public async Task<IActionResult> SendPrompt([FromBody] OrchidServer.DTO.Character charDto)

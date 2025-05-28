@@ -31,7 +31,7 @@
 
         }
 
-        public Models.CharacterStat GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+        public Models.CharacterStat GetModel()
         {
             Models.CharacterStat newModel = new Models.CharacterStat();
             newModel.Id = this.Id;

@@ -22,7 +22,7 @@ public class BanReason
         this.Reason = modelAppeal.Reason;
     }
 
-    public Models.BanReason GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.BanReason GetModel()
     {
         Models.BanReason newModel = new Models.BanReason();
         newModel.Id = this.Id;

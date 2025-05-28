@@ -10,6 +10,7 @@ public class OpenAIImageService
     private readonly HttpClient _httpClient = new HttpClient();
     private readonly string _apiKey = "fakekey";
 
+    //generate an image and save in in wwwroot using a user given prompt
     public async Task<string> GenerateImageAsync(string prompt, int userId,int crId, IWebHostEnvironment env)
     {
         if (string.IsNullOrWhiteSpace(prompt))

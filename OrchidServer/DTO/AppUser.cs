@@ -38,7 +38,7 @@ public class AppUser
         this.PremiumUntil = model.PremiumUntil;
     }
 
-    public Models.AppUser GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.AppUser GetModel()
     {
         Models.AppUser newModel = new Models.AppUser();
         newModel.Id = this.Id;

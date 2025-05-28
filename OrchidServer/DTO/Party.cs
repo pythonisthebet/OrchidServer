@@ -34,7 +34,7 @@ public class Party
         //}
         }
 
-    public Models.Party GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Party GetModel()
     {
         Models.Party newModel = new Models.Party();
         newModel.Id = this.Id;

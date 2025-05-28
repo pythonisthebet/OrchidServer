@@ -37,7 +37,7 @@ public class Post
         this.Pviews = model.Pviews;
     }
 
-    public Models.Post GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Post GetModel()
     {
         Models.Post newModel = new Models.Post();
         newModel.Id = this.Id;

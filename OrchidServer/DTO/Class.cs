@@ -27,7 +27,7 @@ public class Class
 
     }
 
-    public Models.Class GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Class GetModel()
     {
         Models.Class newModel = new Models.Class();
         newModel.Id = this.Id;

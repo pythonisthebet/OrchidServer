@@ -26,7 +26,7 @@ public class Equipment
         this.IsAttunment = model.IsAttunment;
     }
 
-    public Models.Equipment GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Equipment GetModel()
     {
         Models.Equipment newModel = new Models.Equipment();
         newModel.Id = this.Id;

@@ -13,7 +13,7 @@
             this.Fname = model.Fname;
         }
 
-        public Models.Filter GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+        public Models.Filter GetModel()
         {
             Models.Filter newModel = new Models.Filter();
             newModel.Id = this.Id;

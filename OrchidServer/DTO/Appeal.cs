@@ -22,7 +22,7 @@ public class Appeal
         this.Explanation = modelAppeal.Explanation;
     }
 
-    public Models.Appeal GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Appeal GetModel()
     {
         Models.Appeal newModel = new Models.Appeal();
         newModel.Id = this.Id;

@@ -18,7 +18,7 @@
             this.FilterId = model.FilterId;
         }
 
-        public Models.FiltersToCharacter GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+        public Models.FiltersToCharacter GetModel()
         {
             Models.FiltersToCharacter newModel = new Models.FiltersToCharacter();
             newModel.Id = this.Id;

@@ -27,7 +27,7 @@ public class Spell
         this.SpellLevel = model.SpellLevel;
     }
 
-    public Models.Spell GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Spell GetModel()
     {
         Models.Spell newModel = new Models.Spell();
         newModel.Id = this.Id;

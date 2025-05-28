@@ -30,7 +30,7 @@ public class Comment
         this.Likes = model.Likes;
     }
 
-    public Models.Comment GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Comment GetModel()
     {
         Models.Comment newModel = new Models.Comment();
         newModel.Id = this.Id;

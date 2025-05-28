@@ -23,7 +23,7 @@ public class Race
         this.SubraceName = model.SubraceName;
     }
 
-    public Models.Race GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Race GetModel()
     {
         Models.Race newModel = new Models.Race();
         newModel.Id = this.Id;

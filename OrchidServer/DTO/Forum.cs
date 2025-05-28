@@ -22,7 +22,7 @@ public class Forum
         this.Fname = model.Fname;
     }
 
-    public Models.Forum GetModel()///////////user id does not link to the respectiv user in db need fix!!!!!!
+    public Models.Forum GetModel()
     {
         Models.Forum newModel = new Models.Forum();
         newModel.Id = this.Id;
