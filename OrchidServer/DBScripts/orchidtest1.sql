@@ -205,6 +205,8 @@ Go
 
 Insert Into AppUsers Values('test1', 'test1@gmail.com', 'test1111', 1,(3000) ,1, 0)
 Insert Into AppUsers Values('test2', 'test2@gmail.com', 'test2222', 1,(3000) ,1, 1)
+Insert Into AppUsers Values('test3', 'test3@gmail.com', 'test3333', 0,(3000) ,0, 0)
+
 Go
 
 Insert Into BanReasons Values(2,'test Reason')

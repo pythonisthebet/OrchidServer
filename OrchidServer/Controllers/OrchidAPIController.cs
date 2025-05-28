@@ -15,6 +15,7 @@ using System.Text.Json;
 using System.Security.Cryptography;
 using Microsoft.Data.SqlClient;
 using System;
+using OrchidServer.Services;
 
 namespace OrchidServer.Controllers
 {
@@ -220,30 +221,36 @@ namespace OrchidServer.Controllers
             }
 
         }
-        //this function check which profile image exist and return the virtual path of it.
-        //if it does not exist it returns the default profile image virtual path
-        private string GetProfileImageVirtualPath(int userId)
+
+        [HttpPost("updateCharacter")]
+        public IActionResult UpdateCharacter([FromBody] OrchidServer.DTO.Character characterDto)
         {
-            string virtualPath = $"/profileImages/{userId}";
-            string path = $"{this.webHostEnvironment.WebRootPath}\\profileImages\\{userId}.png";
-            if (System.IO.File.Exists(path))
+            try
             {
-                virtualPath += ".png";
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+
+                //Create model user class
+                Models.Character modelsCharacter = characterDto.GetModel();
+
+                context.Characters.Update(modelsCharacter);
+                context.SaveChanges();
+
+                //User was added!
+                return Ok(modelsCharacter);
             }
-            else
+            catch (Exception ex)
             {
-                path = $"{this.webHostEnvironment.WebRootPath}\\profileImages\\{userId}.jpg";
-                if (System.IO.File.Exists(path))
-                {
-                    virtualPath += ".jpg";
-                }
-                else
-                {
-                    virtualPath = $"/profileImages/default.png";
-                }
+                return BadRequest(ex.Message);
             }
 
-            return virtualPath;
+        }
+
+        //this function check which profile image exist and return the virtual path of it.
+        //if it does not exist it returns the default profile image virtual path
+        private string GetProfileImageVirtualPath(int userId, int chId)
+        {
+            string path = $"{this.webHostEnvironment.WebRootPath}\\CharacterImages\\Iu{userId}c{chId}.png";
+            return path;
         }
 
         [HttpGet("getAllUsers")]
@@ -972,7 +979,7 @@ namespace OrchidServer.Controllers
 
                 //Create model user class
                 Models.Character modelsCharacter = charDto.GetModel();
-                System.IO.File.Delete($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{charDto.UserId}c{charDto}.json");
+                System.IO.File.Delete($"{this.webHostEnvironment.WebRootPath}\\Characters\\u{charDto.UserId}c{charDto.Id}.json");
 
 
                 context.Characters.Remove(modelsCharacter);
@@ -1006,6 +1013,43 @@ namespace OrchidServer.Controllers
                     Dtocharacters.Add(placeholderuser);
                 }
                 return Ok(Dtocharacters);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+        }
+
+        [HttpPost("sendPrompt")]
+        public async Task<IActionResult> SendPrompt([FromBody] OrchidServer.DTO.Character charDto)
+        {
+            try
+            {
+                HttpContext.Session.Clear(); //Logout any previous login attempt
+                
+                //Create model user class
+
+
+                OpenAIImageService service = new OpenAIImageService();
+                string error = await service.GenerateImageAsync(charDto.ImgId,(int)charDto.UserId,charDto.Id,this.webHostEnvironment);
+                if (error == "bad prompt")
+                {
+                    return BadRequest("Chat GPT didnt like your prompt, please try again!");
+                }
+                else
+                {
+                    charDto.ImgId = $"https://zbwv4jk5-5029.euw.devtunnels.ms//CharacterImages/{error}?ts={DateTime.UtcNow.Ticks}";
+                }
+
+                UpdateCharacter(charDto);
+                Models.Character modelsCharacter = charDto.GetModel();
+
+                Response.Headers.Append("Cache-Control", "no-cache, no-store, must-revalidate");
+                Response.Headers.Append("Pragma", "no-cache");
+                Response.Headers.Append("Expires", "0");
+                //User was added!
+                return Ok(modelsCharacter);
             }
             catch (Exception ex)
             {
