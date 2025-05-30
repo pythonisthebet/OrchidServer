@@ -72,6 +72,8 @@ namespace OrchidServer
             // And you should press "allow" when windows firewall prompte a message after running the server for the first time!
             //app.Urls.Add("http://*:5110");
             //app.Urls.Add("https://*:7012");
+            DotNetEnv.Env.Load();
+            var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
             app.Run();
         }

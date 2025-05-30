@@ -8,7 +8,7 @@ namespace OrchidServer.Services;
 public class OpenAIImageService
 {
     private readonly HttpClient _httpClient = new HttpClient();
-    private readonly string _apiKey = "fakekey";
+    private readonly string _apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
 
     //generate an image and save in in wwwroot using a user given prompt
     public async Task<string> GenerateImageAsync(string prompt, int userId,int crId, IWebHostEnvironment env)
@@ -16,7 +16,7 @@ public class OpenAIImageService
         if (string.IsNullOrWhiteSpace(prompt))
             throw new ArgumentException("Prompt must not be empty.");
 
-        var apiKey = _apiKey; 
+        var apiKey = Environment.GetEnvironmentVariable("OPENAI_API_KEY");
         var httpClient = new HttpClient();
 
         httpClient.DefaultRequestHeaders.Authorization =
